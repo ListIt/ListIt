@@ -1,0 +1,1 @@
+view2.controller.js
