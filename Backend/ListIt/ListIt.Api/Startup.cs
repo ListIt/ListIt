@@ -5,6 +5,8 @@ using System.Web;
 using Microsoft.Owin;
 using Owin;
 using System.Web.Http;
+using Microsoft.Owin.Security.OAuth;
+using ListIt.Api.Providers;
 
 [assembly: OwinStartup(typeof(ListIt.Api.Startup))]
 namespace ListIt.Api
@@ -15,8 +17,26 @@ namespace ListIt.Api
         {
             var config = new HttpConfiguration();
             WebApiConfig.Register(config);
+            ConfigureOAuth(app);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
+            
+        }
+
+        public void ConfigureOAuth(IAppBuilder app)
+        {
+            var authorizationOptions = new OAuthAuthorizationServerOptions
+            {
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/api/users/login"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                Provider = new LocalAuthorizationProvider()
+            };
+
+            var authenticationOptions = new OAuthBearerAuthenticationOptions();
+
+            app.UseOAuthAuthorizationServer(authorizationOptions);
+            app.UseOAuthBearerAuthentication(authenticationOptions);
         }
     }
 }

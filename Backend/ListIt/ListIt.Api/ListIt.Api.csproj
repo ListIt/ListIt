@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Infrastructure\ListItDataContext.cs" />
     <Compile Include="Migrations\201612210112261_InitialMigration.cs" />
     <Compile Include="Migrations\201612210112261_InitialMigration.Designer.cs">
@@ -184,10 +185,12 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductPhoto.cs" />
     <Compile Include="Models\ProductTag.cs" />
+    <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\LocalAuthorizationProvider.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,7 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612210112261_InitialMigration.resx">

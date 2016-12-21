@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ListIt</title>
+    
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <a class="navbar-brand" ui-sref="feed">ListIt</a>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a ui-sref="feed">Feed</a>
+                </li>
+                <li>
+                    <a ui-sref="messaging">Messages</a>
+                </li>
+                <li>
+                    <a ui-sref="about">About</a>
+                </li>
+                <li>
+                    <a ui-sref="profile.user">Login/Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div ui-view></div>
+    </div>
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/chart.js/dist/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="app/app.module.js"></script>
+    <script src="app/about/about.controller.js"></script>
+    <script src="app/feed/feed.controller.js"></script>
+    <script src="app/core/feed.factory.js"></script>
+    <script src="app/core/login.factory.js"></script>
+    <script src="app/core/messaging.factory.js"></script>
+    <script src="app/core/productdetail.factory.js"></script>
+    <script src="app/core/profile.factory.js"></script>
+    <script src="app/core/transaction.factory.js"></script>
+    <script src="app/login/login.controller.js"></script>
+    <script src="app/messaging/messaging.controller.js"></script>
+    <script src="app/productdetail/productdetail.controller.js"></script>
+    <script src="app/profile/profile.merchant.controller.js"></script>
+    <script src="app/profile/profile.user.controller.js"></script>
+    <script src="app/transaction/transaction.controller.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>
