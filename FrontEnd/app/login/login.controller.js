@@ -5,10 +5,10 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = [];
+    LoginController.$inject = ['userFactory'];
 
     /* @ngInject */
-    function LoginController() {
+    function LoginController(userFactory) {
         var vm = this;
         vm.title = 'LoginController';
 

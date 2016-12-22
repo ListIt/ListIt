@@ -37,13 +37,16 @@ namespace ListIt.Api.Controllers
                     Category = new
                     {
                         p.Category.Name
-                    }
-                    /*, STOPPED HERE
+                    }/*,
                     Photos = p.ProductPhotos.Select(pp => new
                     {
                         pp.Name,
                         pp.Url,
                         pp.Active
+                    }),
+                    ProductTag = p.ProductTags.Select(pt => new
+                    {
+                        pt.Tag.Name
                     })*/
 
                 })
@@ -62,7 +65,29 @@ namespace ListIt.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(new
+            {
+                product.ProductId,
+                product.Name,
+                Seller = new
+                {
+                    product.User.UserName,
+                    product.User.Id,
+                    product.User.ZipCode
+                },
+                Category = new
+                {
+                    product.Category.Name
+                },
+                Photos = product.ProductPhotos.Select(pp => new
+                    {
+                        pp.Name,
+                        pp.Url,
+                        pp.ProductPhotoId,
+                        pp.Active
+                    })
+                
+             });
         }
 
         // PUT: api/Products/5
@@ -79,7 +104,14 @@ namespace ListIt.Api.Controllers
                 return BadRequest();
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            // This is how we update stuff
+            var dbProduct = db.Products.Find(id);
+
+            dbProduct.Name = product.Name;
+            dbProduct.Description = product.Description;
+            dbProduct.Amount = product.Amount;
+
+            db.Entry(dbProduct).State = EntityState.Modified;
 
             try
             {

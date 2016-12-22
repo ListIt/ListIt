@@ -5,10 +5,10 @@
         .module('app')
         .controller('TransactionController', TransactionController);
 
-    TransactionController.$inject = [];
+    TransactionController.$inject = ['transactionFactory'];
 
     /* @ngInject */
-    function TransactionController() {
+    function TransactionController(transactionFactory) {
         var vm = this;
         vm.title = 'TransactionController';
 

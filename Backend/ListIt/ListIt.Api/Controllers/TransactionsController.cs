@@ -18,9 +18,9 @@ namespace ListIt.Api.Controllers
         private ListItDataContext db = new ListItDataContext();
 
         // GET: api/Transactions
-        public IQueryable<Transaction> GetTransactions()
+        public IHttpActionResult GetTransactions()
         {
-            return db.Transactions;
+            return Ok(db.Transactions);
         }
 
         // GET: api/Transactions/5
