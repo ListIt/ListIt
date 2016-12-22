@@ -13,6 +13,7 @@ namespace ListIt.Api.Models
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string ZipCode { get; set; }
+        public string ProfilePhotoUrl { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

@@ -53,7 +53,7 @@ namespace ListIt.Api.Migrations
                 .PrimaryKey(t => t.CategoryId);
             
             CreateTable(
-                "dbo.ProductPhotoes",
+                "dbo.ProductPhotos",
                 c => new
                     {
                         ProductPhotoId = c.Int(nullable: false, identity: true),
@@ -189,7 +189,7 @@ namespace ListIt.Api.Migrations
             DropForeignKey("dbo.Bookmarks", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.ProductTags", "ProductId", "dbo.Products");
             DropForeignKey("dbo.ProductTags", "TagId", "dbo.Tags");
-            DropForeignKey("dbo.ProductPhotoes", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.ProductPhotos", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Bookmarks", "ProductId", "dbo.Products");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -202,7 +202,7 @@ namespace ListIt.Api.Migrations
             DropIndex("dbo.Transactions", new[] { "TransactionId" });
             DropIndex("dbo.ProductTags", new[] { "TagId" });
             DropIndex("dbo.ProductTags", new[] { "ProductId" });
-            DropIndex("dbo.ProductPhotoes", new[] { "ProductId" });
+            DropIndex("dbo.ProductPhotos", new[] { "ProductId" });
             DropIndex("dbo.Products", new[] { "CategoryId" });
             DropIndex("dbo.Products", new[] { "UserId" });
             DropIndex("dbo.Bookmarks", new[] { "ProductId" });
@@ -215,7 +215,7 @@ namespace ListIt.Api.Migrations
             DropTable("dbo.Transactions");
             DropTable("dbo.Tags");
             DropTable("dbo.ProductTags");
-            DropTable("dbo.ProductPhotoes");
+            DropTable("dbo.ProductPhotos");
             DropTable("dbo.Categories");
             DropTable("dbo.Products");
             DropTable("dbo.Bookmarks");

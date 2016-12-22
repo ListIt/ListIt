@@ -1,0 +1,3 @@
+To Do
+
+-add ProfilePhotoUrl column to Users table in SQL Database

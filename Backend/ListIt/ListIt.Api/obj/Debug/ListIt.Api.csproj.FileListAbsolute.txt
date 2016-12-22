@@ -69,3 +69,5 @@ C:\dev\ListIt\Backend\ListIt\ListIt.Api\bin\System.Web.Http.Cors.dll
 C:\dev\ListIt\Backend\ListIt\ListIt.Api\bin\System.Web.Http.Cors.xml
 C:\dev\ListIt\Backend\ListIt\ListIt.Api\obj\Debug\ListIt.Api.Migrations.InitialMigration.resources
 C:\dev\ListIt\Backend\ListIt\ListIt.Api\obj\Debug\ListIt.Api.csproj.GenerateResource.Cache
+C:\dev\ListIt\Backend\ListIt\ListIt.Api\obj\Debug\ListIt.Api.Migrations.AddProfilePhotoColumn.resources
+C:\dev\ListIt\Backend\ListIt\ListIt.Api\obj\Debug\ListIt.Api.Migrations.NoMorePhotatoes.resources
