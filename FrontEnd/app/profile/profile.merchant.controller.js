@@ -5,10 +5,10 @@
         .module('app')
         .controller('ProfileMerchantController', ProfileMerchantController);
 
-    ProfileMerchantController.$inject = [];
+    ProfileMerchantController.$inject = ['transactionFactory'];
 
     /* @ngInject */
-    function ProfileMerchantController() {
+    function ProfileMerchantController(transactionFactory) {
         var vm = this;
         vm.title = 'ProfileMerchantController';
 

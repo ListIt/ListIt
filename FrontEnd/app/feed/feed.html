@@ -1,3 +1,26 @@
-<h1>FEED PAGE</h1>
-
- <button ui-sref="productdetail" type="button" class="btn btn-primary">Go to product details</button>
+<div class="container">
+    <div>
+        <div class="input-group">
+            <span class="input-group-addon">
+        		<i class="fa fa-search"></i>
+        	</span>
+            <input type="text" class="form-control" placeholder="Search for any item...">
+            <span class="input-group-btn">
+        		<button class="btn btn-primary" type="button">Go!</button>
+      		</span>
+        </div>
+    </div>
+    <br>
+    <p>Displaying {{feedCtrl.products.count}} products</p>
+    <div class="row">
+        <div ng-repeat="product in feedCtrl.products.products" class="col-md-6">
+            <div class="panel panel panel-info">
+                <div class="panel-heading">{{product.name}}</div>
+                <div class="panel-body">IMG</div>
+                <div class="panel-footer">{{product.amount | currency}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<h1>FEED</h1>
+    <button ui-sref="productdetail" type="button" class="btn btn-primary">Go to product details</button>-->

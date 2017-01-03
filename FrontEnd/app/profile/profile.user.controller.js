@@ -5,10 +5,10 @@
         .module('app')
         .controller('ProfileUserController', ProfileUserController);
 
-    ProfileUserController.$inject = [];
+    ProfileUserController.$inject = ['userFactory'];
 
     /* @ngInject */
-    function ProfileUserController() {
+    function ProfileUserController(userFactory) {
         var vm = this;
         vm.title = 'ProfileUserController';
 

@@ -18,9 +18,16 @@ namespace ListIt.Api.Controllers
         private ListItDataContext db = new ListItDataContext();
 
         // GET: api/Categories
-        public IQueryable<Category> GetCategories()
+        public IHttpActionResult GetCategories()
         {
-            return db.Categories;
+            var resultSet = db.Categories.Select(t => new
+            {
+                t.CategoryId,
+                t.Description,
+                t.Name
+
+            });
+            return Ok(resultSet);
         }
 
         // GET: api/Categories/5
@@ -33,7 +40,15 @@ namespace ListIt.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(category);
+            return Ok(new
+            {
+                category.CategoryId,
+                category.Description,
+                category.Name
+            }
+
+
+                );
         }
 
         // PUT: api/Categories/5

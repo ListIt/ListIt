@@ -18,13 +18,19 @@ namespace ListIt.Api.Controllers
         private ListItDataContext db = new ListItDataContext();
 
         // GET: api/Tags
-        public IQueryable<Tag> GetTags()
-        {
-            return db.Tags;
-        }
-
-        // GET: api/Tags/5
-        [ResponseType(typeof(Tag))]
+        public IHttpActionResult GetTags()
+        { 
+            var resultSet = db.Tags.Select(t => new
+            {
+                        t.TagId,
+                        t.Name
+                       
+            });
+                
+                return Ok(resultSet);
+    }
+    // GET: api/Tags/5
+    [ResponseType(typeof(Tag))]
         public IHttpActionResult GetTag(int id)
         {
             Tag tag = db.Tags.Find(id);

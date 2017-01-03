@@ -1,3 +1,5 @@
 To Do
 
+-make changes to html
+
 -add ProfilePhotoUrl column to Users table in SQL Database

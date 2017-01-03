@@ -5,10 +5,10 @@
         .module('app')
         .controller('ProductDetailController', ProductDetailController);
 
-    ProductDetailController.$inject = [];
+    ProductDetailController.$inject = ['productFactory'];
 
     /* @ngInject */
-    function ProductDetailController() {
+    function ProductDetailController(productFactory) {
         var vm = this;
         vm.title = 'ProductDetailController';
 
