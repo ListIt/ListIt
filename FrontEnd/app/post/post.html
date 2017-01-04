@@ -1,0 +1,40 @@
+<form>
+    <div class="form-group">
+        <label for="">Name of Item</label>
+        <input type="text" class="form-control" ng-model="postCtrl.newProduct.name" />
+    </div>
+    <div class="form-group">
+        <label for="">Asking Price</label>
+        <input type="text" class="form-control" ng-model="postCtrl.newProduct.amount">
+    </div>
+    <div class="form-group">
+        <label for="">Condition</label>
+        <select class="form-control" ng-model="postCtrl.newProduct.condition">
+            <option value="1">New</option>
+            <option value="2">Like New</option>
+            <option value="3">Excellent</option>
+            <option value="4">Good</option>
+            <option value="5">Fair</option>
+            <option value="6">Salvage</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>What category does your item fall under?</label>
+        <select class="form-control" ng-options="c.categoryId as c.name for c in postCtrl.categories" ng-model="postCtrl.newProduct.categoryId">
+            <option value="">Select a Category</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="">Item Description</label>
+        <textarea class="form-control" ng-model="postCtrl.newProduct.description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input filepicker type="filepicker" data-fp-services="computer,facebook,webcam,box" on-success="postCtrl.photoAdded()" ng-model="postCtrl.newPhoto" />
+    </div>
+    <div class="gallery-container">
+        <p class="lead text-center" ng-hide="postCtrl.newProduct.productPhotos.length">Images will show here when uploaded</p>
+        <img ng-repeat="photo in postCtrl.newProduct.productPhotos" ng-src="{{photo.url}}" alt="">
+    </div>
+    <button type="submit" class="btn btn-success" ng-click="postCtrl.createPost()">Post</button>
+</form>

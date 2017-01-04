@@ -5,6 +5,7 @@ using System.Web;
 using ListIt.Api.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ListIt.Api.Infrastructure
 {
@@ -27,6 +28,7 @@ namespace ListIt.Api.Infrastructure
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Many to 1 relations
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //// 1 User has many Products
             modelBuilder.Entity<User>()

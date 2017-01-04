@@ -2,9 +2,11 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'toastr'])
+        .module('app', ['ui.router', 'toastr', 'angular-filepicker', 'dcbImgFallback'])
         .value('apiUrl', 'http://localhost:49916/api')
-        .config(function($stateProvider, $urlRouterProvider) {
+        .config(function(filepickerProvider, $stateProvider, $urlRouterProvider) {
+
+            filepickerProvider.setKey('AA8agRk3cQLe1ECIKWfgBz');
 
             $stateProvider
 
@@ -31,7 +33,7 @@
 
             //Product Detail state
                 .state('productdetail', {
-                url: '/productdetail',
+                url: '/productdetail?id',
                 controller: 'ProductDetailController as productDetailCtrl',
                 templateUrl: '/app/productdetail/productdetail.html'
             })
@@ -43,7 +45,7 @@
                     template: '<div ui-view></div>'
                 })
                 .state('profile.user', {
-                    url: '/user',
+                    url: '/user?id',
                     controller: 'ProfileUserController as profileUserCtrl',
                     templateUrl: '/app/profile/profile.user.html'
                 })
@@ -65,6 +67,13 @@
                 url: '/about',
                 controller: 'AboutController as aboutCtrl',
                 templateUrl: '/app/about/about.html'
+            })
+
+            // Post state
+                .state('post', {
+                    url: '/post',
+                    controller: 'PostController as postCtrl',
+                    templateUrl: '/app/post/post.html'
             })
 
         });

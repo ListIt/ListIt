@@ -14,7 +14,8 @@
             getAll: getAll,
             getById: getById,
             update: update,
-            remove: remove
+            remove: remove,
+            addPhoto: addPhoto
         };
         return service;
 
@@ -38,6 +39,10 @@
 
         function remove(id) {
             return $http.delete(apiUrl + '/products/' + id);
+        }
+
+        function addPhoto(id, photo) {
+            return $http.post(apiUrl + '/products/' + id + '/photo', photo);
         }
     }
 })();

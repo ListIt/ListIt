@@ -1,5 +1,6 @@
 namespace ListIt.Api.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +27,38 @@ namespace ListIt.Api.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            //            < option > Antique </ option >
+            //< option > Appliances </ option >
+            //< option > Bikes </ option >
+            //< option > Boats </ option >
+            //< option > Cars </ option >
+            //< option > Books </ option >
+            //< option > Phones </ option >
+            //< option > Trailers </ option >
+            //< option > Video Games </ option >
+
+            //   < option > Electronics </ option >
+
+            //   < option > Wanted </ option >
+
+            //   < option > Other </ option >
+
+            context.Categories.AddOrUpdate(
+                 c => c.Name,
+                 new Category { Name = "Antique" },
+                 new Category { Name = "Appliances" },
+                 new Category { Name = "Bikes" },
+                 new Category { Name = "Boats" },
+                 new Category { Name = "Cars" },
+                 new Category { Name = "Books" },
+                 new Category { Name = "Phones" },
+                 new Category { Name = "Trailers" },
+                 new Category { Name = "Video Games" },
+                 new Category { Name = "Electronics" },
+                 new Category { Name = "Wanted" },
+                 new Category { Name = "Other" }
+            );
         }
     }
 }

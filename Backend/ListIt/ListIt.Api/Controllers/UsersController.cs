@@ -9,6 +9,8 @@ using ListIt.Api.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Http.Description;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace ListIt.Api.Controllers
 {
@@ -33,7 +35,7 @@ namespace ListIt.Api.Controllers
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetUser(string id)
         {
             User User = db.Users.Find(id);
             if (User == null)
@@ -47,6 +49,8 @@ namespace ListIt.Api.Controllers
                 User.FirstName,
                 User.LastName,
                 User.Email,
+                User.BirthDate,
+                User.ZipCode,
                 User.UserName,
                 User.PhoneNumber,
                 User.ProfilePhotoUrl/*,
@@ -96,9 +100,55 @@ namespace ListIt.Api.Controllers
             }
         }
 
+        // PUT: api/users/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutProduct(string id, User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            // This is how we update stuff
+            var dbUsers = db.Users.Find(id);
+
+            dbUsers.UserName = user.UserName;
+            dbUsers.ProfilePhotoUrl = user.ProfilePhotoUrl;
+            
+
+            db.Entry(dbUsers).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         protected override void Dispose(bool disposing)
         {
             _userManager.Dispose();
+        }
+        private bool UserExists(string id)
+        {
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }

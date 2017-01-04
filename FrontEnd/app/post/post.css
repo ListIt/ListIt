@@ -1,0 +1,18 @@
+.gallery-container {
+	background-color: #f0f0f0;
+	border: 1px solid #d0d0d0;
+	padding: 24px;
+	margin: 12px 0;
+	margin-bottom: 20px;
+}
+
+.gallery-container p {
+	margin: 0;
+	color: lightgray;
+}
+
+.gallery-container img {
+	max-width: 200px;
+	border: 2px solid gray;
+	margin: 6px;
+}
