@@ -1,4 +1,56 @@
 <h1>User Profile</h1>
-
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                    
+                        <img ng-src="{{profileUserCtrl.user.profilePhotoUrl}}" loading-src="{{'profile/img/noPicture.jpg'}}"  alt="" class="img-rounded img-responsive" />
+                        <br>
+						<div class="text-center">
+                        <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.userPhotoUpdated()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            {{profileUserCtrl.user.firstName}} {{profileUserCtrl.user.lastName}}</h4>
+                        <cite><i class="glyphicon glyphicon-map-marker">
+                        </i> {{profileUserCtrl.user.zipCode}} </cite>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i> {{profileUserCtrl.user.email}}
+                            <br/>
+                            <i class="glyphicon glyphicon-gift"></i> {{profileUserCtrl.user.birthDate | date}}</p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">
+                                Social</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Github</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <button ui-sref="profile.merchant" type="button" class="btn btn-primary">Merchant </button>
 <button ui-sref="messaging" type="button" class="btn btn-primary">Messaging </button>
+<br>
+<br>
+<!-- <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input filepicker type="filepicker" data-fp-services="computer,facebook,webcam,box" on-success="postCtrl.photoAdded()" ng-model="postCtrl.newPhoto" />
+    </div>
+    <div class="gallery-container">
+        <p class="lead text-center" ng-hide="postCtrl.newProduct.productPhotos.length">Images will show here when uploaded</p>
+        <img ng-repeat="photo in postCtrl.newProduct.productPhotos" ng-src="{{photo.url}}" alt="">
+    </div> -->

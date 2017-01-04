@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'toastr', 'angular-filepicker'])
+        .module('app', ['ui.router', 'toastr', 'angular-filepicker', 'dcbImgFallback'])
         .value('apiUrl', 'http://localhost:49916/api')
         .config(function(filepickerProvider, $stateProvider, $urlRouterProvider) {
 
@@ -45,7 +45,7 @@
                     template: '<div ui-view></div>'
                 })
                 .state('profile.user', {
-                    url: '/user',
+                    url: '/user?id',
                     controller: 'ProfileUserController as profileUserCtrl',
                     templateUrl: '/app/profile/profile.user.html'
                 })
