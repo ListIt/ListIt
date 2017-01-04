@@ -5,14 +5,17 @@
         .module('app')
         .controller('FeedController', FeedController);
 
-    FeedController.$inject = ['productFactory'];
+    FeedController.$inject = ['productFactory', '$stateParams'];
 
     /* @ngInject */
-    function FeedController(productFactory) {
+    function FeedController(productFactory, $stateParams) {
         var vm = this;
         vm.title = 'FeedController';
 
         vm.products = [];
+        vm.openNav = openNav;
+        vm.closeNav = closeNav;
+
         activate();
 
         ////////////////
@@ -27,6 +30,19 @@
                 .catch(function(error) {
                     console.log('you suck');
                 });
+        }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            document.body.style.backgroundColor = "white";
         }
     }
 })();

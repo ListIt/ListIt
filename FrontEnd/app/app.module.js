@@ -31,7 +31,7 @@
 
             //Product Detail state
                 .state('productdetail', {
-                url: '/productdetail',
+                url: '/productdetail?id',
                 controller: 'ProductDetailController as productDetailCtrl',
                 templateUrl: '/app/productdetail/productdetail.html'
             })
@@ -65,6 +65,13 @@
                 url: '/about',
                 controller: 'AboutController as aboutCtrl',
                 templateUrl: '/app/about/about.html'
+            })
+
+            // Post state
+                .state('post', {
+                    url: '/post',
+                    controller: 'postController as postCtrl',
+                    templateUrl: '/app/post/post.html'
             })
 
         });
