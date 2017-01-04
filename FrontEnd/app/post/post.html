@@ -1,53 +1,40 @@
 <form>
     <div class="form-group">
-        <label for="exampleInputEmail1">Name of Item</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="">Name of Item</label>
+        <input type="text" class="form-control" ng-model="postCtrl.newProduct.name" />
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Asking Price</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="">Asking Price</label>
+        <input type="text" class="form-control" ng-model="postCtrl.newProduct.amount">
     </div>
     <div class="form-group">
-        <label for="exampleSelect1">Example select</label>
-        <select class="form-control" id="exampleSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+        <label for="">Condition</label>
+        <select class="form-control" ng-model="postCtrl.newProduct.condition">
+            <option value="1">New</option>
+            <option value="2">Like New</option>
+            <option value="3">Excellent</option>
+            <option value="4">Good</option>
+            <option value="5">Fair</option>
+            <option value="6">Salvage</option>
         </select>
     </div>
     <div class="form-group">
-        <label for="exampleSelect2">What category does your item fall under?</label>
-        <select multiple class="form-control" id="exampleSelect2">
-            <option>Antique</option>
-            <option>Appliances</option>
-            <option>Bikes</option>
-            <option>Boats</option>
-            <option>Cars</option>
-            <option>Books</option>
-            <option>Phones</option>
-            <option>Trailers</option>
-            <option>Video Games</option>
-            <option>Electronics</option>
-            <option>Wanted</option>
-            <option>Other</option>
+        <label>What category does your item fall under?</label>
+        <select class="form-control" ng-options="c.categoryId as c.name for c in postCtrl.categories" ng-model="postCtrl.newProduct.categoryId">
+            <option value="">Select a Category</option>
         </select>
     </div>
     <div class="form-group">
-        <label for="exampleTextarea">Item Description</label>
-        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+        <label for="">Item Description</label>
+        <textarea class="form-control" ng-model="postCtrl.newProduct.description" rows="3"></textarea>
     </div>
     <div class="form-group">
         <label for="exampleInputFile">File input</label>
-        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+        <input filepicker type="filepicker" data-fp-services="computer,facebook,webcam,box" on-success="postCtrl.photoAdded()" ng-model="postCtrl.newPhoto" />
     </div>
-    <div class="form-check">
-        <label class="form-check-label">
-            <input type="checkbox" class="form-check-input"> Send me notifications
-        </label>
+    <div class="gallery-container">
+        <p class="lead text-center" ng-hide="postCtrl.newProduct.productPhotos.length">Images will show here when uploaded</p>
+        <img ng-repeat="photo in postCtrl.newProduct.productPhotos" ng-src="{{photo.url}}" alt="">
     </div>
-    <button type="submit" class="btn btn-success">Post</button>
+    <button type="submit" class="btn btn-success" ng-click="postCtrl.createPost()">Post</button>
 </form>

@@ -24,12 +24,12 @@
         <div>
             <div class="input-group">
                 <span class="input-group-addon">
-        		<i class="fa fa-search"></i>
-        	</span>
+                <i class="fa fa-search"></i>
+            </span>
                 <input type="text" class="form-control" placeholder="Search for any item...">
                 <span class="input-group-btn">
-        		<button class="btn btn-primary" type="button">Go!</button>
-      		</span>
+                <button class="btn btn-primary" type="button">Go!</button>
+            </span>
             </div>
         </div>
         <br>
@@ -38,7 +38,12 @@
             <div ui-sref="productdetail({id:{{product.productId}}})" style="cursor:pointer" ng-repeat="product in feedCtrl.products.products" class="col-md-4">
                 <div class="panel panel panel-info">
                     <div class="panel-heading">{{product.name}}</div>
-                    <div class="panel-body">IMG</div>
+                    <div class="panel-body">
+                        <div class="gallery-container">
+                            <p class="lead text-center" ng-hide="product.photos.length">No Images for this Product</p>
+                            <img ng-repeat="photo in product.photos" ng-src="{{photo.url}}" alt="">
+                        </div>
+                    </div>
                     <div class="panel-footer">{{product.amount | currency}}</div>
                 </div>
             </div>

@@ -37,7 +37,7 @@ namespace ListIt.Api.Controllers
                     Category = new
                     {
                         p.Category.Name
-                    }/*,
+                    },
                     Photos = p.ProductPhotos.Select(pp => new
                     {
                         pp.Name,
@@ -47,8 +47,7 @@ namespace ListIt.Api.Controllers
                     ProductTag = p.ProductTags.Select(pt => new
                     {
                         pt.Tag.Name
-                    })*/
-
+                    })
                 })
             };
 
@@ -141,6 +140,8 @@ namespace ListIt.Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            product.Posted = DateTime.Now;
+
             db.Products.Add(product);
             db.SaveChanges();
 
@@ -161,6 +162,19 @@ namespace ListIt.Api.Controllers
             db.SaveChanges();
 
             return Ok(product);
+        }
+
+        // POST: api/Products/5/photo
+        [Route("api/products/{id}/photo")]
+        public IHttpActionResult PostProductPhoto(int id, ProductPhoto photo)
+        {
+            photo.ProductId = id;
+
+            db.ProductPhotos.Add(photo);
+
+            db.SaveChanges();
+
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
