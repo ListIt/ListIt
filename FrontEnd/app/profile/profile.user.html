@@ -23,6 +23,7 @@
                             <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
                             <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i>
                             <br/>
+
                             <i ng-hide="editing" class="glyphicon glyphicon-gift"></i> {{profileUserCtrl.user.birthDate | date}}</p>
                     </div>
                 </div>
@@ -30,9 +31,9 @@
         </div>
     </div>
 </div>
-<button ui-sref="profile.merchant" type="button" class="btn btn-primary">Merchant </button>
-<button ui-sref="messaging" type="button" class="btn btn-primary">Messaging </button>
-<button ng-click="profileUserCtrl.logout()" class="btn btn-primary"><i class="fa fa-logout"></i> Logout</button>
+<button ui-sref="profile.merchant" type="button" class="btn btn-primary" style="background-color: #EA6100">Merchant </button>
+<button ui-sref="messaging" type="button" class="btn btn-primary" style="background-color: #EA6100">Messaging </button>
+<button ng-click="profileUserCtrl.logout()" class="btn btn-primary" style="background-color: #EA6100"><i class="fa fa-logout"></i> Logout</button>
 <br>
 <br>
 <!-- <div class="form-group">

@@ -18,23 +18,25 @@
 </head>
 
 <body>
-    <div class="navbar navbar-inverse">
+    <div class="navbar" style="background-color: #00937F !important">
         <div class="container-fluid">
-            <a class="navbar-brand" ui-sref="feed">ListIt</a>
-            <ul class="nav navbar-nav">
+            <a class="navbar-brand" ui-sref="feed" style="color: white !important; width: 125px !important; margin-right: -22px"><span><img alt="" src="img/logo.png.png" style="height: 200%; margin-top: -10px"> ListIt</span></a>
+            <ul class="nav navbar-nav" style="margin-top: 4px">
                 <li class="active">
-                    <a ui-sref="feed">Feed</a>
+                    <a ui-sref="feed" style="color: white !important">Feed</a>
                 </li>
                 <li>
-                    <a ui-sref="messaging">Messages</a>
+                    <a ui-sref="messaging" style="color: white !important">Messages</a>
                 </li>
                 <li>
-                    <a ui-sref="about">About</a>
+                    <a ui-sref="about" style="color: white !important">About</a>
                 </li>
                 <li>
-                    <a ui-sref="profile.user">Login/Profile</a>
+                    <a ui-sref="profile.user" style="color: white !important">Login/Profile</a>
                 </li>
-                <li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 1em">
+               <li>
                     <button class="btn btn-success" style="margin-top: 10px" ui-sref="post">Sell Something</button>
                 </li>
             </ul>
