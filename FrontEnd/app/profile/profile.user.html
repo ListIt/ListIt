@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
                     
-                        <img ng-src="{{profileUserCtrl.user.profilePhotoUrl}}" loading-src="{{'profile/img/noPicture.jpg'}}"  alt="" class="img-rounded img-responsive" />
+                        <img ng-src="{{profileUserCtrl.user.profilePhotoUrl || 'app/profile/img/noPicture.jpg'}}"  alt="" class="img-rounded img-responsive" />
                         <br>
 						<div class="text-center">
                         <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.userPhotoUpdated()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
@@ -44,6 +44,7 @@
 </div>
 <button ui-sref="profile.merchant" type="button" class="btn btn-primary">Merchant </button>
 <button ui-sref="messaging" type="button" class="btn btn-primary">Messaging </button>
+<button ng-click="profileUserCtrl.logout()" class="btn btn-primary"><i class="fa fa-logout"></i> Logout</button>
 <br>
 <br>
 <!-- <div class="form-group">

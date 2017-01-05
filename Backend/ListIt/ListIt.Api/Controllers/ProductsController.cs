@@ -18,6 +18,7 @@ namespace ListIt.Api.Controllers
         private ListItDataContext db = new ListItDataContext();
 
         // GET: api/Products
+        [Authorize]
         public IHttpActionResult GetProducts()
         {
             var resultSet = new
@@ -132,6 +133,7 @@ namespace ListIt.Api.Controllers
         }
 
         // POST: api/Products
+        [Authorize]
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
         {
@@ -140,7 +142,12 @@ namespace ListIt.Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            string usernameFromToken = User.Identity.Name;
+
+            var userFromDb = db.Users.First(u => u.UserName == User.Identity.Name);
+
             product.Posted = DateTime.Now;
+            product.UserId = userFromDb.Id;
 
             db.Products.Add(product);
             db.SaveChanges();
