@@ -1,5 +1,8 @@
 namespace ListIt.Api.Migrations
 {
+    using Infrastructure;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
     using System.Data.Entity;
@@ -15,35 +18,16 @@ namespace ListIt.Api.Migrations
 
         protected override void Seed(ListIt.Api.Infrastructure.ListItDataContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if(context.Users.Count() == 0)
+            {
+                SeedCategories(context);
+                SeedUsers(context);
+                SeedProducts(context);
+            }
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-
-            //            < option > Antique </ option >
-            //< option > Appliances </ option >
-            //< option > Bikes </ option >
-            //< option > Boats </ option >
-            //< option > Cars </ option >
-            //< option > Books </ option >
-            //< option > Phones </ option >
-            //< option > Trailers </ option >
-            //< option > Video Games </ option >
-
-            //   < option > Electronics </ option >
-
-            //   < option > Wanted </ option >
-
-            //   < option > Other </ option >
-
+        private void SeedCategories(ListItDataContext context)
+        {
             context.Categories.AddOrUpdate(
                  c => c.Name,
                  new Category { Name = "Antique" },
@@ -59,6 +43,60 @@ namespace ListIt.Api.Migrations
                  new Category { Name = "Wanted" },
                  new Category { Name = "Other" }
             );
+
+            context.SaveChanges();
+        }
+
+        private void SeedUsers(ListItDataContext context)
+        {
+            var userStore = new UserStore<User>(context);
+            using (var manager = new UserManager<User>(userStore))
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    var randomEmail = Faker.InternetFaker.Email();
+
+                    manager.Create(new User
+                    {
+                        BirthDate = Faker.DateTimeFaker.BirthDay(),
+                        Email = randomEmail,
+                        FirstName = Faker.NameFaker.FirstName(),
+                        LastName = Faker.NameFaker.LastName(),
+                        PhoneNumber = Faker.PhoneFaker.Phone(),
+                        UserName = randomEmail,
+                        ZipCode = Faker.LocationFaker.ZipCode()
+                    }, "password123");
+                }
+            }
+
+            context = new ListItDataContext();
+        }
+
+        private void SeedProducts(ListItDataContext context)
+        {
+            foreach (var user in context.Users)
+            {
+                int randomNumber = Faker.NumberFaker.Number(0, 5);
+
+                for (int i = 0; i < randomNumber; i++)
+                {
+                    var product = new Product
+                    {
+                        UserId = user.Id,
+                        Active = Faker.BooleanFaker.Boolean(),
+                        Amount = Faker.NumberFaker.Number(10, 2000).ToString(),
+                        CategoryId = Faker.NumberFaker.Number(1, context.Categories.Count()),
+                        Condition = Faker.NumberFaker.Number(1,6),
+                        Description = Faker.TextFaker.Sentences(2),
+                        Name = Faker.TextFaker.Sentence(),
+                        Posted = Faker.DateTimeFaker.DateTime(DateTime.Now.AddYears(-1), DateTime.Now)
+                    };
+
+                    context.Products.Add(product);
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }

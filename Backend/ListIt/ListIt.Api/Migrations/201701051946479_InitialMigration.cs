@@ -8,7 +8,7 @@ namespace ListIt.Api.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Bookmarks",
+                "dbo.Bookmark",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
@@ -16,13 +16,13 @@ namespace ListIt.Api.Migrations
                         BookmarkId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserId, t.ProductId })
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Products",
+                "dbo.Product",
                 c => new
                     {
                         ProductId = c.Int(nullable: false, identity: true),
@@ -37,13 +37,13 @@ namespace ListIt.Api.Migrations
                         Condition = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ProductId)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.Category", t => t.CategoryId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.CategoryId);
             
             CreateTable(
-                "dbo.Categories",
+                "dbo.Category",
                 c => new
                     {
                         CategoryId = c.Int(nullable: false, identity: true),
@@ -53,7 +53,7 @@ namespace ListIt.Api.Migrations
                 .PrimaryKey(t => t.CategoryId);
             
             CreateTable(
-                "dbo.ProductPhotos",
+                "dbo.ProductPhoto",
                 c => new
                     {
                         ProductPhotoId = c.Int(nullable: false, identity: true),
@@ -63,11 +63,11 @@ namespace ListIt.Api.Migrations
                         Active = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ProductPhotoId)
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.ProductTags",
+                "dbo.ProductTag",
                 c => new
                     {
                         ProductId = c.Int(nullable: false),
@@ -75,13 +75,13 @@ namespace ListIt.Api.Migrations
                         ProductTagId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.ProductId, t.TagId })
-                .ForeignKey("dbo.Tags", t => t.TagId, cascadeDelete: true)
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Tag", t => t.TagId, cascadeDelete: true)
+                .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
                 .Index(t => t.ProductId)
                 .Index(t => t.TagId);
             
             CreateTable(
-                "dbo.Tags",
+                "dbo.Tag",
                 c => new
                     {
                         TagId = c.Int(nullable: false, identity: true),
@@ -90,7 +90,7 @@ namespace ListIt.Api.Migrations
                 .PrimaryKey(t => t.TagId);
             
             CreateTable(
-                "dbo.Transactions",
+                "dbo.Transaction",
                 c => new
                     {
                         TransactionId = c.Int(nullable: false),
@@ -99,7 +99,7 @@ namespace ListIt.Api.Migrations
                     })
                 .PrimaryKey(t => t.TransactionId)
                 .ForeignKey("dbo.AspNetUsers", t => t.BuyerId, cascadeDelete: true)
-                .ForeignKey("dbo.Products", t => t.TransactionId)
+                .ForeignKey("dbo.Product", t => t.TransactionId)
                 .Index(t => t.TransactionId)
                 .Index(t => t.BuyerId);
             
@@ -112,6 +112,7 @@ namespace ListIt.Api.Migrations
                         LastName = c.String(),
                         BirthDate = c.DateTime(),
                         ZipCode = c.String(),
+                        ProfilePhotoUrl = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -180,45 +181,45 @@ namespace ListIt.Api.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Transactions", "TransactionId", "dbo.Products");
-            DropForeignKey("dbo.Transactions", "BuyerId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Transaction", "TransactionId", "dbo.Product");
+            DropForeignKey("dbo.Transaction", "BuyerId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Products", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Product", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Bookmarks", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.ProductTags", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.ProductTags", "TagId", "dbo.Tags");
-            DropForeignKey("dbo.ProductPhotos", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.Bookmarks", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.Bookmark", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.ProductTag", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.ProductTag", "TagId", "dbo.Tag");
+            DropForeignKey("dbo.ProductPhoto", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.Product", "CategoryId", "dbo.Category");
+            DropForeignKey("dbo.Bookmark", "ProductId", "dbo.Product");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Transactions", new[] { "BuyerId" });
-            DropIndex("dbo.Transactions", new[] { "TransactionId" });
-            DropIndex("dbo.ProductTags", new[] { "TagId" });
-            DropIndex("dbo.ProductTags", new[] { "ProductId" });
-            DropIndex("dbo.ProductPhotos", new[] { "ProductId" });
-            DropIndex("dbo.Products", new[] { "CategoryId" });
-            DropIndex("dbo.Products", new[] { "UserId" });
-            DropIndex("dbo.Bookmarks", new[] { "ProductId" });
-            DropIndex("dbo.Bookmarks", new[] { "UserId" });
+            DropIndex("dbo.Transaction", new[] { "BuyerId" });
+            DropIndex("dbo.Transaction", new[] { "TransactionId" });
+            DropIndex("dbo.ProductTag", new[] { "TagId" });
+            DropIndex("dbo.ProductTag", new[] { "ProductId" });
+            DropIndex("dbo.ProductPhoto", new[] { "ProductId" });
+            DropIndex("dbo.Product", new[] { "CategoryId" });
+            DropIndex("dbo.Product", new[] { "UserId" });
+            DropIndex("dbo.Bookmark", new[] { "ProductId" });
+            DropIndex("dbo.Bookmark", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Transactions");
-            DropTable("dbo.Tags");
-            DropTable("dbo.ProductTags");
-            DropTable("dbo.ProductPhotos");
-            DropTable("dbo.Categories");
-            DropTable("dbo.Products");
-            DropTable("dbo.Bookmarks");
+            DropTable("dbo.Transaction");
+            DropTable("dbo.Tag");
+            DropTable("dbo.ProductTag");
+            DropTable("dbo.ProductPhoto");
+            DropTable("dbo.Category");
+            DropTable("dbo.Product");
+            DropTable("dbo.Bookmark");
         }
     }
 }
