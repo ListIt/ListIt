@@ -2,9 +2,11 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'toastr', 'angular-filepicker', 'dcbImgFallback'])
+        .module('app', ['ui.router', 'toastr', 'angular-filepicker', 'dcbImgFallback', 'LocalStorageModule'])
         .value('apiUrl', 'http://localhost:49916/api')
-        .config(function(filepickerProvider, $stateProvider, $urlRouterProvider) {
+        .config(function(filepickerProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+
+            $httpProvider.interceptors.push('authInterceptorService');
 
             filepickerProvider.setKey('AA8agRk3cQLe1ECIKWfgBz');
 

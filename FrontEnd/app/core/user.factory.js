@@ -14,7 +14,8 @@
             getAll: getAll,
             getById: getById,
             update: update,
-            remove: remove
+            remove: remove,
+            getCurrentUser: getCurrentUser
         };
         return service;
 
@@ -38,6 +39,10 @@
 
         function remove(id) {
             return $http.delete(apiUrl + '/users/' + id);
+        }
+
+        function getCurrentUser() {
+            return $http.get(apiUrl + '/me');
         }
     }
 })();

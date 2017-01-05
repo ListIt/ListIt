@@ -5,14 +5,15 @@
             .module('app')
             .controller('ProfileUserController', ProfileUserController);
 
-        ProfileUserController.$inject = ['userFactory', '$stateParams'];
+        ProfileUserController.$inject = ['userFactory', '$stateParams', '$state', 'authFactory'];
 
         /* @ngInject */
-        function ProfileUserController(userFactory, $stateParams) {
+        function ProfileUserController(userFactory, $stateParams, $state, authFactory) {
             var vm = this;
             vm.title = 'ProfileUserController';
 
             vm.userPhotoUpdated = userPhotoUpdated;
+            vm.logout = logout;
             //vm.id = $stateParams.id;
             vm.id = $stateParams.id;
             vm.user = [];
@@ -23,10 +24,8 @@
 
             function activate() {
                 userFactory
-                    .getById(vm.id)
-
-
-                .then(function(response) {
+                    .getCurrentUser()
+                    .then(function(response) {
                         vm.user = response.data;
                         console.log(vm.user);
                     })
@@ -37,14 +36,19 @@
 
             function userPhotoUpdated() {
                 userFactory
-                    .update(vm.id, vm.user)
+                    .update(vm.user.id, vm.user)
 
                 .then(function(response) {
                     console.log('we dont suck')
                     
                 })
 
-            };
+            }
+
+            function logout() {
+                authFactory.logout();
+                $state.go('login');
+            }
         }
     
 })();

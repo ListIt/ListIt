@@ -85,7 +85,9 @@ namespace ListIt.Api.Controllers
 
             var user = new User
             {
-                UserName = registration.EmailAddress
+                UserName = registration.EmailAddress,
+                FirstName = registration.FirstName,
+                LastName = registration.LastName
             };
 
             var result = _userManager.Create(user, registration.Password);
@@ -137,9 +139,47 @@ namespace ListIt.Api.Controllers
                 {
                     throw;
                 }
-            }
+            }   
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpGet, Route("api/me")]
+        public IHttpActionResult GetCurrentUser()
+        {
+            var username = User.Identity.Name;
+
+            var user = db.Users.First(u => u.UserName == username);
+
+            return Ok(new
+            {
+                user.Id,
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                user.BirthDate,
+                user.ZipCode,
+                user.UserName,
+                user.PhoneNumber,
+                user.ProfilePhotoUrl/*,
+                Bookmarks = User.Bookmarks.Select(b => new
+                {
+                    b.Product.Name,
+                    b.Product.ProductId
+                }),
+                Transactions = User.Transactions.Select(t => new
+                {
+                    t.BuyerId,
+                    ProductDetails = new
+                    {
+                        t.Product.Name,
+                        t.ProductId,
+                        t.Product.Amount,
+                        t.Product.CategoryId
+                    }
+                })*/
+            });
+
         }
 
         protected override void Dispose(bool disposing)

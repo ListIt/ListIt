@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
     <!-- endbower -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="app/post/post.css">
     <link rel="stylesheet" href="app/feed/feed.css">
+    <link rel="stylesheet" href="app/post/post.css">
     <!-- endinject -->
 </head>
 
@@ -54,22 +54,25 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/filepicker-js/filepicker.min.js"></script>
     <script src="bower_components/angular-filepicker/dist/angular_filepicker.js"></script>
-    <script src="bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js"></script>
+    <script src="bower_components/angular-img-fallback/angular.dcb-img-fallback.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
     <script src="app/about/about.controller.js"></script>
+    <script src="app/feed/feed.controller.js"></script>
+    <script src="app/login/login.controller.js"></script>
+    <script src="app/core/auth.factory.js"></script>
+    <script src="app/core/auth.interceptor.js"></script>
     <script src="app/core/bookmark.factory.js"></script>
     <script src="app/core/category.factory.js"></script>
     <script src="app/core/product.factory.js"></script>
     <script src="app/core/tag.factory.js"></script>
     <script src="app/core/transaction.factory.js"></script>
     <script src="app/core/user.factory.js"></script>
-    <script src="app/login/login.controller.js"></script>
-    <script src="app/messaging/messaging.controller.js"></script>
     <script src="app/post/post.controller.js"></script>
+    <script src="app/messaging/messaging.controller.js"></script>
     <script src="app/productdetail/productdetail.controller.js"></script>
-    <script src="app/feed/feed.controller.js"></script>
     <script src="app/profile/profile.merchant.controller.js"></script>
     <script src="app/profile/profile.user.controller.js"></script>
     <script src="app/transaction/transaction.controller.js"></script>

@@ -12,6 +12,11 @@ namespace ListIt.Api.Models
         [Required]
         public string EmailAddress { get; set; }
 
+        [Required]
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         [Required, MinLength(8), DataType(DataType.Password)]
         public string Password { get; set; }
 
