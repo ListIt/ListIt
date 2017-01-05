@@ -12,7 +12,7 @@
             var vm = this;
             vm.title = 'ProfileUserController';
 
-            vm.userPhotoUpdated = userPhotoUpdated;
+            vm.updateUser = updateUser;
             vm.logout = logout;
             //vm.id = $stateParams.id;
             vm.id = $stateParams.id;
@@ -34,14 +34,13 @@
                     });
             }
 
-            function userPhotoUpdated() {
+            function updateUser() {
                 userFactory
                     .update(vm.user.id, vm.user)
-
-                .then(function(response) {
-                    console.log('we dont suck')
+                    .then(function(response) {
+                        console.log(vm.user);
                     
-                })
+                    })
 
             }
 
@@ -49,6 +48,8 @@
                 authFactory.logout();
                 $state.go('login');
             }
+
+            
         }
     
 })();
