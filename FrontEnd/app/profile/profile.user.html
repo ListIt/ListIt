@@ -9,7 +9,7 @@
                         <img ng-src="{{profileUserCtrl.user.profilePhotoUrl || 'app/profile/img/noPicture.jpg'}}"  alt="" class="img-rounded img-responsive" />
                         <br>
 						<div class="text-center">
-                        <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.userPhotoUpdated()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
+                        <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.updateUser()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-8">
@@ -18,24 +18,13 @@
                         <cite><i class="glyphicon glyphicon-map-marker">
                         </i> {{profileUserCtrl.user.zipCode}} </cite>
                         <p>
-                            <i class="glyphicon glyphicon-envelope"></i> {{profileUserCtrl.user.email}}
+                            <i class="fa fa-envelope"></i> <span ng-hide="editing">{{profileUserCtrl.user.email}}</span> 
+                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.email"></input>
+                            <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
+                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i>
                             <br/>
-                            <i class="glyphicon glyphicon-gift"></i> {{profileUserCtrl.user.birthDate | date}}</p>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary" style="background-color: #EA6100">
-                                Social</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="background-color: #EA6100">
-                                <span class="caret"></span><span class="sr-only">Social</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
-                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Github</a></li>
-                            </ul>
-                        </div>
+
+                            <i ng-hide="editing" class="glyphicon glyphicon-gift"></i> {{profileUserCtrl.user.birthDate | date}}</p>
                     </div>
                 </div>
             </div>

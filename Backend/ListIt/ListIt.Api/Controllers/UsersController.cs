@@ -87,7 +87,8 @@ namespace ListIt.Api.Controllers
             {
                 UserName = registration.EmailAddress,
                 FirstName = registration.FirstName,
-                LastName = registration.LastName
+                LastName = registration.LastName,
+                Email = registration.EmailAddress
             };
 
             var result = _userManager.Create(user, registration.Password);
@@ -121,6 +122,7 @@ namespace ListIt.Api.Controllers
 
             dbUsers.UserName = user.UserName;
             dbUsers.ProfilePhotoUrl = user.ProfilePhotoUrl;
+            dbUsers.Email = user.Email;
             
 
             db.Entry(dbUsers).State = EntityState.Modified;
