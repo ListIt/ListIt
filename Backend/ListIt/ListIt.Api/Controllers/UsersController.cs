@@ -172,7 +172,8 @@ namespace ListIt.Api.Controllers
                     {
                         pp.Url
                     }),
-                    p.Name
+                    p.Name,
+                    p.ProductId
                 })
                     /*,
                 Bookmarks = User.Bookmarks.Select(b => new

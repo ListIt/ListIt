@@ -25,6 +25,7 @@
         };
 
         vm.getCondition = getCondition;
+        
         activate();
 
         ////////////////

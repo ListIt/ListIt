@@ -1,0 +1,54 @@
+<h1>{{profileMyProductCtrl.product.name}}</h1>
+<br>
+<div class="gallery-container">
+    <p class="lead text-center" ng-hide="profileMyProductCtrl.product.photos.length">Images will show here when uploaded</p>
+    <img ng-repeat="photo in profileMyProductCtrl.product.photos" ng-src="{{photo.url}}">
+</div>
+<div class="container">
+    <span ng-hide="amountEditing" ng-click="amountEditing=!amountEditing" ng-model="profileMyProductCtrl.product.amount">{{profileMyProductCtrl.product.amount | currency}}</span>
+    <i ng-click="amountEditing=!amountEditing" ng-hide="amountEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="amountEditing" ng-model="profileMyProductCtrl.product.amount"></input>
+    <i ng-show="amountEditing" ng-click="profileMyProductCtrl.updateProduct(); amountEditing=!amountEditing" class="fa fa-check"></i>
+    <br>
+    <span ng-hide="zipEditing" ng-click="zipEditing=!zipEditing" ng-model="profileMyProductCtrl.product.seller.zipCode">{{profileMyProductCtrl.product.seller.zipCode}}</span>
+    <i ng-click="zipEditing=!zipEditing" ng-hide="zipEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="zipEditing" ng-model="profileMyProductCtrl.product.seller.zipCode"></input>
+    <i ng-show="zipEditing" ng-click="profileMyProductCtrl.updateProduct(); zipEditing=!zipEditing" class="fa fa-check"></i>
+    <br>
+    <span ng-hide="descEditing" ng-click="descEditing=!descEditing" ng-model="profileMyProductCtrl.product.description">{{profileMyProductCtrl.product.description}}</span>
+    <i ng-click="descEditing=!descEditing" ng-hide="descEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="descEditing" ng-model="profileMyProductCtrl.product.description"></input>
+    <i ng-show="descEditing" ng-click="profileMyProductCtrl.updateProduct(); descEditing=!descEditing" class="fa fa-check"></i>
+    <br>
+    <div class="row">
+        <div class="col-md-1">
+            <select class="form-control" ng-model="profileMyProductCtrl.product.condition">
+                <option value="1">New</option>
+                <option value="2">Like New</option>
+                <option value="3">Excellent</option>
+                <option value="4">Good</option>
+                <option value="5">Fair</option>
+                <option value="6">Salvage</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <select class="form-control" ng-options="c.categoryId as c.name for c in profileMyProductCtrl.product.categories" ng-model="profileMyProductCtrl.product.categoryId">
+                <option value="">Select a Category</option>
+            </select>
+        </div>
+    </div>
+    <!-- 	<span ng-hide="editing" ng-click="editing=!editing" ng-model="profileMyProductCtrl.product.condition">{{profileMyProductCtrl.getCondition(profileMyProductCtrl.product)}}</span>
+	<i ng-click="editing=!editing" ng-hide="editing" class="fa fa-edit"></i>
+	<input type="text" ng-show="editing" ng-model="profileMyProductCtrl.product.condition"></input>
+	<i ng-show="editing" ng-click="profileMyProductCtrl.updateProduct(); editing=!editing" class="fa fa-check"></i>
+	<br>
+	<span ng-hide="editing" ng-click="editing=!editing" ng-model="profileMyProductCtrl.product.category">{{profileMyProductCtrl.product.category.name}}</span>
+	<i ng-click="editing=!editing" ng-hide="editing" class="fa fa-edit"></i>
+	<input type="text" ng-show="editing" ng-model="profileMyProductCtrl.product.category"></input>
+	<i ng-show="editing" ng-click="profileMyProductCtrl.updateProduct(); editing=!editing" class="fa fa-check"></i> -->
+</div>
+</div>
+<br>
+<button ui-sref="feed" type="button" class="btn btn-primary" style="background-color: #EA6100">Back to profile</button>
