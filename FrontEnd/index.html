@@ -15,14 +15,15 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="app/feed/feed.css">
     <link rel="stylesheet" href="app/post/post.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- endinject -->
 </head>
 
-<body ng-controller="MainController as turtle">
-    <div class="navbar" style="padding: 10px; background-color: #00937F !important">
+<body ng-controller="MainController as turtle" >
+    <div class="navbar" style="margin-bottom: -3px; padding: 0px; background-color: #00937F !important">
         <div class="container-fluid">
-            <a class="navbar-brand" ui-sref="feed" style="color: white !important; width: 125px !important; margin-right: -48px"><span><img alt="" src="img/logo.png.png" style="height: 200%; margin-top: -17px"> <br>ListIt</span></a>
-            <ul class="nav navbar-nav" style="margin-top: 4px">
+            <a class="navbar-brand" ui-sref="feed" style="color: white !important; width: 225px !important; margin-right: -125px"><span><img class="fa-spin" alt="" src="img/logo.png.png" style="height: 200%; margin-top: -9px"> ListIt</span></a>
+            <ul class="nav navbar-nav" style="margin-top: 4px; margin-left: 20px">
                 <li class="active">
                     <a ui-sref="feed" style="color: white !important">Feed</a>
                 </li>
@@ -33,7 +34,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 1em">
                <li>
-                    <button class="btn" style="margin-top: 10px; background-color: #EA6100; color: white" ui-sref="post">Sell Something</button>
+                    <button class="btn" style="margin-top: 10px; background-color: #EA6100; color: white" ui-sref="post"><i class="fa fa-dollar"></i>ell <i class="fa fa-dollar"></i>omething</button>
                 </li>
                 <li>
                     <a ui-sref="profile.user" ng-show="turtle.loggedIn" style="color:white">Welcome {{turtle.username}}</a>
@@ -44,7 +45,7 @@
             </ul>
         </div>
     </div>
-    <div class="container-fluid">
+    <div style="margin: 0 auto !important">
         <div ui-view></div>
     </div>
     </div>
@@ -72,15 +73,15 @@
     <script src="app/core/tag.factory.js"></script>
     <script src="app/core/transaction.factory.js"></script>
     <script src="app/core/user.factory.js"></script>
-    <script src="app/feed/feed.controller.js"></script>
     <script src="app/login/login.controller.js"></script>
+    <script src="app/feed/feed.controller.js"></script>
     <script src="app/messaging/messaging.controller.js"></script>
+    <script src="app/main/index.mainController.js"></script>
     <script src="app/post/post.controller.js"></script>
     <script src="app/productdetail/productdetail.controller.js"></script>
     <script src="app/profile/profile.merchant.controller.js"></script>
     <script src="app/profile/profile.user.controller.js"></script>
     <script src="app/transaction/transaction.controller.js"></script>
-    <script src="index.mainController.js"></script>
     <!-- endinject -->
 </body>
 

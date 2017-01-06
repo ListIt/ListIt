@@ -14,13 +14,24 @@
 
         vm.productId = $stateParams.id;
         vm.product = [];
+
+        var conditionMap = {
+            1: 'New',
+            2: 'Like New',
+            3: 'Excellent',
+            4: 'Good',
+            5: 'Fair',
+            6: 'Salvage'
+        };
+
+        vm.getCondition = getCondition;
         activate();
 
         ////////////////
 
         function activate() {
             productFactory
-            .getById(vm.productId)
+                .getById(vm.productId)
 
             .then(function(response) {
                     vm.product = response.data;
@@ -29,6 +40,10 @@
                 .catch(function(error) {
                     console.log('you suck');
                 });
+        }
+
+        function getCondition(product) {
+            return conditionMap[product.condition];
         }
     }
 })();

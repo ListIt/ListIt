@@ -16,9 +16,16 @@
 </div>
 <!-- Use any element to open the sidenav -->
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div style="position: relative; top: 0; right: 0; bottom: 0; left: 0; z-index: -101; top: 0px; width: 100%; overflow: hidden; height: 400px">
+        <h1 style="margin-left: 27em; margin-top: 8em; position: absolute; z-index: 1; color: white" class="lead">Buy. Sell. Win. </h1>
+        <div style="background-color: rgba(0,0,0,.5); position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 1000px "></div>
+        <video style="position: relative; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; width: 100%; min-width: 1245px; z-index: -100; object-fit: contain " preload muted autoplay loop>
+        <source src="https://d2fa3j67sd1nwo.cloudfront.net/video/homepage.020d4af35dca.mp4 " type="video/mp4 ">
+        </video>
+</div>
 <div id="main">
     <div class="container">
-        <button class="btn" ng-click="feedCtrl.openNav()" style="background-color: #EA6100; color: white">Filter</button>
+        <button class="btn" ng-click="feedCtrl.openNav()" style="background-color: #EA6100; color: white"><i class="fa fa-filter"></i>  Filter</button>
         <br>
         <br>
         <div>
@@ -35,13 +42,12 @@
         <br>
         <p>Displaying {{feedCtrl.products.count}} products</p>
         <div class="row">
-            <div ui-sref="productdetail({id:{{product.productId}}})" style="cursor: pointer" ng-repeat="product in feedCtrl.products.products" class="col-md-4 hvr-float">
+            <div ui-sref="productdetail({id:{{product.productId}}})" style="cursor: pointer; height: 350px" ng-repeat="product in feedCtrl.products.products" class="col-md-4 hvr-float">
                 <div class="panel panel" style="border-color: #00937F">
                     <div class="panel-heading" style="background-color: #00937F; color: white">{{product.name}}</div>
                     <div class="panel-body">
-                        <div class="gallery-container">
-                            <p class="lead text-center" ng-hide="product.photos.length">No Images for this Product</p>
-                            <img ng-src="{{product.photos[0].url}}" alt="">
+                        <div class="gallery-container" style="text-align: center">
+                            <img ng-src="{{product.photos[0].url || 'app/profile/img/noPicture.jpg'}}" alt="" style="height: 100px">
                         </div>
                     </div>
                     <div class="panel-footer">{{product.amount | currency}}</div>

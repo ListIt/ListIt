@@ -1,39 +1,57 @@
-<h1>User Profile</h1>
 <div class="container">
+    <h1 class="text-center">User Profile</h1>
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                    
-                        <img ng-src="{{profileUserCtrl.user.profilePhotoUrl || 'app/profile/img/noPicture.jpg'}}"  alt="" class="img-rounded img-responsive" />
+                        <img style="height: 200px" ng-src="{{profileUserCtrl.user.profilePhotoUrl || 'app/profile/img/noPicture.jpg'}}" alt="" class="img-rounded img-responsive" />
                         <br>
-						<div class="text-center">
-                        <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.updateUser()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
+                        <div class="text-center">
+                            <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.updateUser()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-8">
                         <h4>
                             {{profileUserCtrl.user.firstName}} {{profileUserCtrl.user.lastName}}</h4>
                         <cite><i class="glyphicon glyphicon-map-marker">
-                        </i> {{profileUserCtrl.user.zipCode}} </cite>
+                        </i> <span ng-hide="editing">{{profileUserCtrl.user.zipCode}}</span>
+                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.zipCode"></input>
+                            <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
+                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i> </cite>
                         <p>
-                            <i class="fa fa-envelope"></i> <span ng-hide="editing">{{profileUserCtrl.user.email}}</span> 
+                            <i class="fa fa-envelope"></i> <span ng-hide="editing">{{profileUserCtrl.user.email}}</span>
                             <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.email"></input>
                             <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
                             <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i>
                             <br/>
-
-                            <i ng-hide="editing" class="glyphicon glyphicon-gift"></i> {{profileUserCtrl.user.birthDate | date}}</p>
+                            <i class="glyphicon glyphicon-gift"></i> <span ng-hide="editing" ng-click="editing=!editing">{{profileUserCtrl.user.birthDate | date}}</span>
+                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.birthDate"></input><i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
+                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i>
+                            <br/>
+                        </p>
+                        <button ng-click="profileUserCtrl.logout()" class="btn" style="background-color: #EA6100; color: white"><i class="fa fa-logout"></i> Logout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <h1>My Products</h1>
+    <div class="row">
+        <div style="cursor: pointer; height: 350px" ng-repeat="product in profileUserCtrl.user.products" class="col-md-4 hvr-float">
+            <div class="panel panel" style="border-color: #00937F">
+                <div class="panel-heading" style="background-color: #00937F; color: white">{{product.name}}</div>
+                <div class="panel-body">
+                    <div class="gallery-container" style="text-align: center">
+                        <img ng-src="{{product.photos[0].url || 'app/profile/img/noPicture.jpg'}}" alt="" style="height: 100px">
+                    </div>
+                </div>
+                <div class="panel-footer">{{product.amount | currency}}</div>
+            </div>
+        </div>
+    </div>
 </div>
-<button ui-sref="profile.merchant" type="button" class="btn btn-primary" style="background-color: #EA6100">Merchant </button>
-<button ui-sref="messaging" type="button" class="btn btn-primary" style="background-color: #EA6100">Messaging </button>
-<button ng-click="profileUserCtrl.logout()" class="btn btn-primary" style="background-color: #EA6100"><i class="fa fa-logout"></i> Logout</button>
+<br>
 <br>
 <br>
 <!-- <div class="form-group">

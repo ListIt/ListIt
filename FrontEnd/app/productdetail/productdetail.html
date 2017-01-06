@@ -1,12 +1,15 @@
 <div class="container">
 <h1>{{productDetailCtrl.product.name}}</h1>
 <br>
+<div class="gallery-container">
+        <p class="lead text-center" ng-hide="productDetailCtrl.product.photos.length">Images will show here when uploaded</p>
+        <img ng-repeat="photo in productDetailCtrl.product.photos" ng-src="{{photo.url}}">
+    </div>
 <div class="container">
-	<img ng-repeat="photo in productDetailCtrl.product.photos" ng-src="{{photo.url}}">
 	<div>{{productDetailCtrl.product.amount | currency}}</div>
 	<div>{{productDetailCtrl.product.seller.zipcode}}</div>
 	<div>{{productDetailCtrl.product.description}}</div>
-	<div>{{productDetailCtrl.product.condition}}</div>
+	<div>{{productDetailCtrl.getCondition(productDetailCtrl.product)}}</div>
 	<div>{{productDetailCtrl.product.seller.userName}}</div>
 	<div>{{productDetailCtrl.product.category.name}}</div>
 </div>

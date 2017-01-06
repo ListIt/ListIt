@@ -42,7 +42,6 @@
         }
 
         function photoAdded() {
-            debugger;
             vm.newProduct.productPhotos.push({
                 name: 'Picture Yo',
                 url: vm.newPhoto    ,
