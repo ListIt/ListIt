@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="bower_components/hover/css/hover.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="app/feed/feed.css">
@@ -17,27 +18,28 @@
     <!-- endinject -->
 </head>
 
-<body>
-    <div class="navbar" style="background-color: #00937F !important">
+<body ng-controller="MainController as turtle">
+    <div class="navbar" style="padding: 10px; background-color: #00937F !important">
         <div class="container-fluid">
-            <a class="navbar-brand" ui-sref="feed" style="color: white !important; width: 125px !important; margin-right: -22px"><span><img alt="" src="img/logo.png.png" style="height: 200%; margin-top: -10px"> ListIt</span></a>
+            <a class="navbar-brand" ui-sref="feed" style="color: white !important; width: 125px !important; margin-right: -48px"><span><img alt="" src="img/logo.png.png" style="height: 200%; margin-top: -17px"> <br>ListIt</span></a>
             <ul class="nav navbar-nav" style="margin-top: 4px">
                 <li class="active">
                     <a ui-sref="feed" style="color: white !important">Feed</a>
                 </li>
                 <li>
-                    <a ui-sref="messaging" style="color: white !important">Messages</a>
-                </li>
-                <li>
                     <a ui-sref="about" style="color: white !important">About</a>
                 </li>
-                <li>
-                    <a ui-sref="profile.user" style="color: white !important">Login/Profile</a>
-                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 1em">
                <li>
-                    <button class="btn btn-success" style="margin-top: 10px" ui-sref="post">Sell Something</button>
+                    <button class="btn" style="margin-top: 10px; background-color: #EA6100; color: white" ui-sref="post">Sell Something</button>
+                </li>
+                <li>
+                    <a ui-sref="profile.user" ng-show="turtle.loggedIn" style="color:white">Welcome {{turtle.username}}</a>
+                </li>
+                <li>
+                    <a ui-sref="login" ng-hide="turtle.loggedIn" style="color:white">Log In</a>
                 </li>
             </ul>
         </div>
@@ -78,6 +80,7 @@
     <script src="app/profile/profile.merchant.controller.js"></script>
     <script src="app/profile/profile.user.controller.js"></script>
     <script src="app/transaction/transaction.controller.js"></script>
+    <script src="index.mainController.js"></script>
     <!-- endinject -->
 </body>
 

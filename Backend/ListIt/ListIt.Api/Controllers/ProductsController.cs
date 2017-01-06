@@ -69,6 +69,9 @@ namespace ListIt.Api.Controllers
             {
                 product.ProductId,
                 product.Name,
+                product.Amount,
+                product.Condition,
+                product.Description,
                 Seller = new
                 {
                     product.User.UserName,
@@ -78,14 +81,14 @@ namespace ListIt.Api.Controllers
                 Category = new
                 {
                     product.Category.Name
-                }/*,
+                },
                 Photos = product.ProductPhotos.Select(pp => new
                     {
                         pp.Name,
                         pp.Url,
                         pp.ProductPhotoId,
                         pp.Active
-                    })*/
+                    })
                 
              });
         }

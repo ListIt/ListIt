@@ -78,5 +78,8 @@
                     templateUrl: '/app/post/post.html'
             })
 
+        })
+        .run(function(authFactory) {
+            authFactory.initialize();
         });
 })();

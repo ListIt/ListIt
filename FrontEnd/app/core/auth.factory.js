@@ -5,10 +5,10 @@
         .module('app')
         .factory('authFactory', authFactory);
 
-    authFactory.$inject = ['apiUrl', '$http', '$q', 'localStorageService'];
+    authFactory.$inject = ['$rootScope', 'apiUrl', '$http', '$q', 'localStorageService'];
 
     /* @ngInject */
-    function authFactory(apiUrl, $http, $q, localStorageService) {
+    function authFactory($rootScope, apiUrl, $http, $q, localStorageService) {
         var service = {
             register: register,
             login: login,
@@ -56,6 +56,8 @@
                 	service.isLoggedIn = true;
                 	service.username = username;
 
+                    $rootScope.$broadcast('user-login');
+
                 	return response.data;
                 });
         }
@@ -68,7 +70,7 @@
         	// there is a logged in user
         	if(authData) {
         		service.isLoggedIn = true;
-        		service.username = username;
+        		service.username = authData.username;
         	}
         }
 
@@ -76,6 +78,7 @@
         	localStorageService.remove('authorizationData');
         	service.isLoggedIn = false;
         	service.username = '';
+            $rootScope.$broadcast('user-logout');
         }
     }
 })();
