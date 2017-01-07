@@ -33,6 +33,7 @@
     "angular-ui-router": "^0.3.2",
     "angular-filepicker": "^1.1.4",
     "angular-img-fallback": "^0.2.0",
-    "angular-local-storage": "^0.5.2"
+    "angular-local-storage": "^0.5.2",
+    "hover": "^2.1.0"
   }
 }

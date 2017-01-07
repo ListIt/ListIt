@@ -51,10 +51,10 @@
                     controller: 'ProfileUserController as profileUserCtrl',
                     templateUrl: '/app/profile/profile.user.html'
                 })
-                .state('profile.merchant', {
-                    url: '/merchant',
-                    controller: 'ProfileMerchantController as profileMerchantCtrl',
-                    templateUrl: '/app/profile/profile.merchant.html'
+                .state('profile.myProduct', {
+                    url: '/myProduct?id',
+                    controller: 'ProfileMyProductController as profileMyProductCtrl',
+                    templateUrl: '/app/profile/profile.myProduct.html'
                 })
 
             // Transaction state
@@ -78,5 +78,8 @@
                     templateUrl: '/app/post/post.html'
             })
 
+        })
+        .run(function(authFactory) {
+            authFactory.initialize();
         });
 })();

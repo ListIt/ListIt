@@ -123,6 +123,8 @@ namespace ListIt.Api.Controllers
             dbUsers.UserName = user.UserName;
             dbUsers.ProfilePhotoUrl = user.ProfilePhotoUrl;
             dbUsers.Email = user.Email;
+            dbUsers.BirthDate = user.BirthDate;
+            dbUsers.ZipCode = user.ZipCode;
             
 
             db.Entry(dbUsers).State = EntityState.Modified;
@@ -163,7 +165,17 @@ namespace ListIt.Api.Controllers
                 user.ZipCode,
                 user.UserName,
                 user.PhoneNumber,
-                user.ProfilePhotoUrl/*,
+                user.ProfilePhotoUrl,
+                Products = user.Products.Select(p => new
+                {
+                    Photos = p.ProductPhotos.Select(pp => new
+                    {
+                        pp.Url
+                    }),
+                    p.Name,
+                    p.ProductId
+                })
+                    /*,
                 Bookmarks = User.Bookmarks.Select(b => new
                 {
                     b.Product.Name,
