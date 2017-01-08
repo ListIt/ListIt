@@ -14,7 +14,6 @@
 
         vm.updateUser = updateUser;
         vm.logout = logout;
-        //vm.id = $stateParams.id;
         vm.id = $stateParams.id;
         vm.user = [];
 

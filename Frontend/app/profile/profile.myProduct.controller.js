@@ -25,8 +25,18 @@
             6: 'Salvage'
         };
 
+        vm.conditionArray = [
+            {name: 'New'       , value: 1},
+            {name: 'Like New'  , value: 2},
+            {name: 'Excellent' , value: 3},
+            {name: 'Good'      , value: 4},
+            {name: 'Fair'      , value: 5},
+            {name: 'Salvage'   , value: 6},
+        ]
+
         vm.getCondition = getCondition;
         vm.updateProduct = updateProduct;
+        vm.photoAdded = photoAdded;
 
         activate();
 
@@ -65,6 +75,14 @@
 
                 })
 
+        }
+
+        function photoAdded() {
+            vm.product.productPhotos.push({
+                name: 'Picture Yo',
+                url: vm.newPhoto    ,
+                active: true
+            });
         }
     }
 })();

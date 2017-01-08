@@ -37,7 +37,8 @@ namespace ListIt.Api.Controllers
                     p.Condition,
                     Category = new
                     {
-                        p.Category.Name
+                        p.Category.Name,
+                        p.Category.CategoryId
                     },
                     Photos = p.ProductPhotos.Select(pp => new
                     {
@@ -80,7 +81,8 @@ namespace ListIt.Api.Controllers
                 },
                 Category = new
                 {
-                    product.Category.Name
+                    product.Category.Name,
+                    product.Category.CategoryId
                 },
                 Photos = product.ProductPhotos.Select(pp => new
                     {
@@ -113,6 +115,8 @@ namespace ListIt.Api.Controllers
             dbProduct.Name = product.Name;
             dbProduct.Description = product.Description;
             dbProduct.Amount = product.Amount;
+            dbProduct.Condition = product.Condition;
+            dbProduct.CategoryId = product.Category.CategoryId;
 
             db.Entry(dbProduct).State = EntityState.Modified;
 
