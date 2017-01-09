@@ -5,10 +5,10 @@
         .module('app')
         .controller('FeedController', FeedController);
 
-    FeedController.$inject = ['productFactory', '$stateParams'];
+    FeedController.$inject = ['productFactory', '$stateParams', '$state'];
 
     /* @ngInject */
-    function FeedController(productFactory, $stateParams) {
+    function FeedController(productFactory, $stateParams, $state) {
         var vm = this;
         vm.title = 'FeedController';
 

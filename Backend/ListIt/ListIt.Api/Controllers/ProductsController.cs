@@ -117,6 +117,7 @@ namespace ListIt.Api.Controllers
             dbProduct.Amount = product.Amount;
             dbProduct.Condition = product.Condition;
             dbProduct.CategoryId = product.Category.CategoryId;
+            dbProduct.ProductPhotos = product.ProductPhotos;
 
             db.Entry(dbProduct).State = EntityState.Modified;
 
@@ -179,12 +180,25 @@ namespace ListIt.Api.Controllers
         }
 
         // POST: api/Products/5/photo
-        [Route("api/products/{id}/photo")]
+        [HttpPost, Route("api/products/{id}/photo")]
         public IHttpActionResult PostProductPhoto(int id, ProductPhoto photo)
         {
             photo.ProductId = id;
 
             db.ProductPhotos.Add(photo);
+
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+        // DELETE: api/Products/5/photo
+        [HttpDelete, Route("api/products/{id}/photo")]
+        public IHttpActionResult RemoveProductPhoto(int id, ProductPhoto photo)
+        {
+            photo.ProductId = id;
+
+            db.ProductPhotos.Remove(photo);
 
             db.SaveChanges();
 

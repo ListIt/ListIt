@@ -26,7 +26,6 @@
                             <i ng-hide="zipEditing" ng-click="zipEditing=!zipEditing" class="fa fa-edit"></i>
                             <i ng-show="zipEditing" ng-click="profileUserCtrl.updateUser(); zipEditing=!zipEditing" class="fa fa-check"></i> </cite>
                             <br><br>
-                        <p>
                             <i class="fa fa-envelope"></i> <span ng-hide="emailEditing">{{profileUserCtrl.user.email}}</span>
                             <input ng-show="emailEditing" type="text" ng-model="profileUserCtrl.user.email"></input>
                             <i ng-hide="emailEditing" ng-click="emailEditing=!emailEditing" class="fa fa-edit"></i>
@@ -35,8 +34,11 @@
                             <i class="glyphicon glyphicon-gift"></i> <span ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing">{{profileUserCtrl.user.birthDate | date}}</span>
                             <input ng-show="bdayEditing" type="text" ng-model="profileUserCtrl.user.birthDate"></input><i ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing" class="fa fa-edit"></i>
                             <i ng-show="bdayEditing" ng-click="profileUserCtrl.updateUser(); bdayEditing=!bdayEditing" class="fa fa-check"></i>
-                            <br/>
-                        </p><br>
+                            <br/><br>
+                             <i class="glyphicon glyphicon-phone"></i> <span ng-hide="phoneEditing" ng-click="phoneEditing=!phoneEditing">{{profileUserCtrl.user.phoneNumber}}</span>
+                            <input ng-show="phoneEditing" type="text" ng-model="profileUserCtrl.user.phoneNumber"></input><i ng-hide="phoneEditing" ng-click="phoneEditing=!phoneEditing" class="fa fa-edit"></i>
+                            <i ng-show="phoneEditing" ng-click="profileUserCtrl.updateUser(); phoneEditing=!phoneEditing" class="fa fa-check"></i>
+                            <br/><br>
                         <button ng-click="profileUserCtrl.logout()" class="btn" style="background-color: #EA6100; color: white"><i class="fa fa-logout"></i> Logout</button>
                     </div>
                 </div>
@@ -51,6 +53,16 @@
                 <div class="panel-body">
                     <div class="gallery-container" style="text-align: center">
                         <img ng-src="{{product.photos[0].url || 'app/profile/img/noPicture.jpg'}}" alt="" style="height: 100px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ui-sref="post" style="cursor: pointer; height: 350px" class="col-sm-6 col-xs-12 col-md-4 hvr-float">
+            <div class="panel panel" style="border-color: #00937F">
+                <div class="panel-heading" style="background-color: #00937F; color: white"><i class="fa fa-plus"></i></div>
+                <div class="panel-body">
+                    <div class="gallery-container" style="text-align: center">
+                        <span><h1>Post New Product</h1></span>
                     </div>
                 </div>
             </div>

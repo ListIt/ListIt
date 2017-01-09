@@ -5,10 +5,10 @@
         .module('app')
         .controller('ProfileMyProductController', ProfileMyProductController);
 
-    ProfileMyProductController.$inject = ['productFactory', 'categoryFactory', '$stateParams'];
+    ProfileMyProductController.$inject = ['productFactory', 'categoryFactory', '$stateParams','filepicker'];
 
     /* @ngInject */
-    function ProfileMyProductController(productFactory, categoryFactory, $stateParams) {
+    function ProfileMyProductController(productFactory, categoryFactory, $stateParams, filepicker) {
         var vm = this;
         vm.title = 'ProfileMyProductController';
 
@@ -37,6 +37,8 @@
         vm.getCondition = getCondition;
         vm.updateProduct = updateProduct;
         vm.photoAdded = photoAdded;
+        vm.newPhoto = {};
+        vm.photoRemoved = photoRemoved;
 
         activate();
 
@@ -56,7 +58,6 @@
                 .getAll()
                 .then(function(response) {
                     vm.categories = response.data;
-                    console.log(vm.categories);
                 })
                 .catch(function(error) {
                     console.log('you suck');
@@ -72,17 +73,35 @@
                 .update(vm.productId, vm.product)
                 .then(function(response) {
                     console.log(vm.product);
-
                 })
 
         }
 
         function photoAdded() {
-            vm.product.productPhotos.push({
+            vm.newPhoto = {
                 name: 'Picture Yo',
-                url: vm.newPhoto    ,
+                url: vm.newPhotoUrl,
                 active: true
-            });
+            }
+            vm.product.photos.push(vm.newPhoto);
+            productFactory
+                .addPhoto(vm.productId, vm.newPhoto)
+                .then(function(response) {
+                    console.log(vm.product);
+                })
+        }
+
+        function photoRemoved(photo) {
+            // filepicker.remove(photo, function(){
+            //     console.log("Removed");
+            // });
+            productFactory
+                .removePhoto(vm.productId, photo)
+                .then(function(response) {
+                    var index = vm.product.photos.indexOf(photo);
+                    vm.students.splice(index, 1);
+                    console.log(vm.product);
+                })
         }
     }
 })();
