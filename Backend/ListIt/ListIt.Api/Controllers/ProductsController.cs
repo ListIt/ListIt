@@ -189,17 +189,20 @@ namespace ListIt.Api.Controllers
 
             db.SaveChanges();
 
-            return Ok();
+            return Ok(photo);
         }
 
         // DELETE: api/Products/5/photo
-        [HttpDelete, Route("api/products/{id}/photo")]
-        public IHttpActionResult RemoveProductPhoto(int id, ProductPhoto photo)
+        [HttpDelete, Route("api/products/{id}/photo/{photoId}")]
+        public IHttpActionResult RemoveProductPhoto(int id, int photoId)
         {
-            photo.ProductId = id;
+            ProductPhoto photo = db.ProductPhotos.Find(photoId);
+            if (photo == null)
+            {
+                return NotFound();
+            }
 
             db.ProductPhotos.Remove(photo);
-
             db.SaveChanges();
 
             return Ok();

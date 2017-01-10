@@ -34,6 +34,7 @@
     "angular-filepicker": "^1.1.4",
     "angular-img-fallback": "^0.2.0",
     "angular-local-storage": "^0.5.2",
-    "hover": "^2.1.0"
+    "hover": "^2.1.0",
+    "animate.css": "^3.5.2"
   }
 }

@@ -5,10 +5,10 @@
         .module('app')
         .controller('FeedController', FeedController);
 
-    FeedController.$inject = ['productFactory', '$stateParams', '$state'];
+    FeedController.$inject = ['$timeout', 'productFactory', '$stateParams', '$state'];
 
     /* @ngInject */
-    function FeedController(productFactory, $stateParams, $state) {
+    function FeedController($timeout, productFactory, $stateParams, $state) {
         var vm = this;
         vm.title = 'FeedController';
 
@@ -21,15 +21,20 @@
         ////////////////
 
         function activate() {
-            productFactory
-                .getAll()
-                .then(function(response) {
-                    vm.products = response.data;
-                    console.log(vm.products);
-                })
-                .catch(function(error) {
-                    console.log('you suck');
-                });
+            vm.loading = true;
+            $timeout(function() {
+                productFactory
+                    .getAll()
+                    .then(function(response) {
+                        vm.products = response.data;
+                        console.log(vm.products);
+                        vm.loading = false;
+                    })
+                    .catch(function(error) {
+                        console.log('you suck');
+                    });
+            }, 2000);
+
         }
 
         function openNav() {

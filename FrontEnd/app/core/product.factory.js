@@ -46,8 +46,8 @@
             return $http.post(apiUrl + '/products/' + id + '/photo', photo);
         }
 
-        function removePhoto(id, photo) {
-            return $http.delete(apiUrl + '/products/' + id + '/photo', photo);
+        function removePhoto(id, photoId) {
+            return $http.delete(apiUrl + '/products/' + id + '/photo/' + photoId);
         }
     }
 })();

@@ -83,10 +83,10 @@
                 url: vm.newPhotoUrl,
                 active: true
             }
-            vm.product.photos.push(vm.newPhoto);
             productFactory
                 .addPhoto(vm.productId, vm.newPhoto)
                 .then(function(response) {
+                    vm.product.photos.push(response.data);
                     console.log(vm.product);
                 })
         }
@@ -96,10 +96,10 @@
             //     console.log("Removed");
             // });
             productFactory
-                .removePhoto(vm.productId, photo)
+                .removePhoto(vm.productId, photo.productPhotoId)
                 .then(function(response) {
                     var index = vm.product.photos.indexOf(photo);
-                    vm.students.splice(index, 1);
+                    vm.product.photos.splice(index, 1);
                     console.log(vm.product);
                 })
         }
