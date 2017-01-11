@@ -5,10 +5,10 @@
         .module('app')
         .controller('ProfileMyProductController', ProfileMyProductController);
 
-    ProfileMyProductController.$inject = ['productFactory', 'categoryFactory', '$stateParams','filepicker'];
+    ProfileMyProductController.$inject = ['productFactory', 'categoryFactory', '$stateParams','filepicker','$state','toastr', '$timeout'];
 
     /* @ngInject */
-    function ProfileMyProductController(productFactory, categoryFactory, $stateParams, filepicker) {
+    function ProfileMyProductController(productFactory, categoryFactory, $stateParams, filepicker, $state, toastr, $timeout) {
         var vm = this;
         vm.title = 'ProfileMyProductController';
 
@@ -39,29 +39,34 @@
         vm.photoAdded = photoAdded;
         vm.newPhoto = {};
         vm.photoRemoved = photoRemoved;
+        vm.deleteProduct = deleteProduct;
 
         activate();
 
         ////////////////
 
         function activate() {
-            productFactory
-                .getById(vm.productId)
-                .then(function(response) {
-                    vm.product = response.data;
-                    console.log(vm.product);
-                })
-                .catch(function(error) {
-                    console.log('you suck');
-                });
-            categoryFactory
-                .getAll()
-                .then(function(response) {
-                    vm.categories = response.data;
-                })
-                .catch(function(error) {
-                    console.log('you suck');
-                });
+            vm.loading = true;
+            $timeout(function() {
+                productFactory
+                    .getById(vm.productId)
+                    .then(function(response) {
+                        vm.loading = false;
+                        vm.product = response.data;
+                        console.log(vm.product);
+                    })
+                    .catch(function(error) {
+                        console.log('you suck');
+                    });
+                categoryFactory
+                    .getAll()
+                    .then(function(response) {
+                        vm.categories = response.data;
+                    })
+                    .catch(function(error) {
+                        console.log('you suck');
+                    });
+                },2000);
         }
 
         function getCondition(product) {
@@ -72,8 +77,13 @@
             productFactory
                 .update(vm.productId, vm.product)
                 .then(function(response) {
+                    toastr.success("Changes saved successfully.")
                     console.log(vm.product);
                 })
+                .catch(function(error) {
+                    toastr.error("(Don't ask us why)","Save failed")
+                    console.log('deletion not successful');
+                });
 
         }
 
@@ -102,6 +112,22 @@
                     vm.product.photos.splice(index, 1);
                     console.log(vm.product);
                 })
+        }
+
+        function deleteProduct() {
+            if (confirm('Are you sure you want to delete this product?')) {
+                productFactory
+                    .remove(vm.productId)
+                    .then(function(response) {
+                        toastr.success('Successfully deleted the product.','"Great Success!" - Borat');
+                        $state.go('profile.user');
+                    })
+                    .catch(function(error) {
+                        console.log('deletion not successful');
+                    });
+            } else {
+                console.log("Okay, man");
+            }
         }
     }
 })();

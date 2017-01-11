@@ -1,4 +1,13 @@
-<div class="container">
+<div ng-show="profileUserCtrl.loading">
+<br><br><br><br><br>
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+<div ng-hide="profileUserCtrl.loading" class="container animated fadeIn">
     <div class="text-center">
         <h1 ng-hide="nameEditing">{{profileUserCtrl.user.firstName}} {{profileUserCtrl.user.lastName}} <i ng-hide="nameEditing" ng-click="nameEditing=!nameEditing" class="fa fa-edit"></i></h1>
         <h1>
@@ -32,7 +41,7 @@
                             <i ng-show="emailEditing" ng-click="profileUserCtrl.updateUser(); emailEditing=!emailEditing" class="fa fa-check"></i>
                             <br/><br>
                             <i class="glyphicon glyphicon-gift"></i> <span ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing">{{profileUserCtrl.user.birthDate | date}}</span>
-                            <input ng-show="bdayEditing" type="text" ng-model="profileUserCtrl.user.birthDate"></input><i ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing" class="fa fa-edit"></i>
+                            <input ng-show="bdayEditing" type="date" placeholder="Enter Birth Date" ng-model="profileUserCtrl.user.birthDate"></input><i ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing" class="fa fa-edit"></i>
                             <i ng-show="bdayEditing" ng-click="profileUserCtrl.updateUser(); bdayEditing=!bdayEditing" class="fa fa-check"></i>
                             <br/><br>
                              <i class="glyphicon glyphicon-phone"></i> <span ng-hide="phoneEditing" ng-click="phoneEditing=!phoneEditing">{{profileUserCtrl.user.phoneNumber}}</span>
@@ -47,9 +56,14 @@
     </div>
     <h1>My Products</h1>
     <div class="row">
-        <div ui-sref="profile.myProduct({id:{{product.productId}}})" style="cursor: pointer; height: 350px" ng-repeat="product in profileUserCtrl.user.products" class="col-sm-6 col-xs-12 col-md-4 hvr-float">
+        <div ui-sref="profile.myProduct({id:{{product.productId}}})" style="cursor: pointer; height: 350px" ng-repeat="product in profileUserCtrl.user.products" class="col-sm-6 col-xs-12 col-md-4 hvr-float row-fluid">
             <div class="panel panel" style="border-color: #00937F">
-                <div class="panel-heading" style="background-color: #00937F; color: white">{{product.name}}</div>
+                <div class="panel-heading clearfix" style="background-color: #00937F; color: white">
+                    <div>
+                        <a class="inline" style="font-size: 22px;color:white;text-decoration: none">{{product.name}}</a>
+                        <button class="btn inline pull-right" style="background-color: #EA6100">Edit</button>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="gallery-container" style="text-align: center">
                         <img ng-src="{{product.photos[0].url || 'app/profile/img/noPicture.jpg'}}" alt="" style="height: 100px">

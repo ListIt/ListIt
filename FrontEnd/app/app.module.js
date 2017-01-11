@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'toastr', 'angular-filepicker', 'dcbImgFallback', 'LocalStorageModule'])
+        .module('app', ['ui.router', 'toastr', 'angular-filepicker', 'LocalStorageModule'])
         .value('apiUrl', 'http://localhost:49916/api')
         .config(function(filepickerProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
 

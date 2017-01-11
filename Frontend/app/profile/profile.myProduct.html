@@ -1,3 +1,13 @@
+<div ng-show="profileMyProductCtrl.loading">
+<br><br><br><br><br>
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+<div ng-hide="profileMyProductCtrl.loading" class="animated fadeIn">
 <div class="container">
 <h1>
     <span ng-hide="nameEditing" ng-click="nameEditing=!nameEditing" ng-model="profileMyProductCtrl.product.name">{{profileMyProductCtrl.product.name}}</span>
@@ -55,14 +65,5 @@
     <br>
     <button type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100;" ng-click="profileMyProductCtrl.updateProduct()">Save Changes</button>
     <button ui-sref="profile.user" type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100;">Back to profile</button>
-    <!-- 	<span ng-hide="editing" ng-click="editing=!editing" ng-model="profileMyProductCtrl.product.condition">{{profileMyProductCtrl.getCondition(profileMyProductCtrl.product)}}</span>
-	<i ng-click="editing=!editing" ng-hide="editing" class="fa fa-edit"></i>
-	<input type="text" ng-show="editing" ng-model="profileMyProductCtrl.product.condition"></input>
-	<i ng-show="editing" ng-click="profileMyProductCtrl.updateProduct(); editing=!editing" class="fa fa-check"></i>
-	<br>
-	<span ng-hide="editing" ng-click="editing=!editing" ng-model="profileMyProductCtrl.product.category">{{profileMyProductCtrl.product.category.name}}</span>
-	<i ng-click="editing=!editing" ng-hide="editing" class="fa fa-edit"></i>
-	<input type="text" ng-show="editing" ng-model="profileMyProductCtrl.product.category"></input>
-	<i ng-show="editing" ng-click="profileMyProductCtrl.updateProduct(); editing=!editing" class="fa fa-check"></i> -->
-</div>
+    <button class="btn btn-danger pull-right" ng-click="profileMyProductCtrl.deleteProduct()">Delete Product</button>
 </div>
