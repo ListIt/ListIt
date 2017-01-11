@@ -16,7 +16,8 @@
             update: update,
             remove: remove,
             addPhoto: addPhoto,
-            removePhoto: removePhoto
+            removePhoto: removePhoto,
+            getSearchResults: getSearchResults
         };
         return service;
 
@@ -48,6 +49,10 @@
 
         function removePhoto(id, photoId) {
             return $http.delete(apiUrl + '/products/' + id + '/photo/' + photoId);
+        }
+
+        function getSearchResults(term) {
+            return $http.get(apiUrl + '/products/search?term=' + term);
         }
     }
 })();

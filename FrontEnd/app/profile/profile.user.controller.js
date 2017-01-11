@@ -5,10 +5,10 @@
         .module('app')
         .controller('ProfileUserController', ProfileUserController);
 
-    ProfileUserController.$inject = ['userFactory', '$stateParams', '$state', 'authFactory'];
+    ProfileUserController.$inject = ['userFactory', '$stateParams', '$state', 'authFactory', 'toastr'];
 
     /* @ngInject */
-    function ProfileUserController(userFactory, $stateParams, $state, authFactory) {
+    function ProfileUserController(userFactory, $stateParams, $state, authFactory, toastr) {
         var vm = this;
         vm.title = 'ProfileUserController';
 
@@ -45,6 +45,7 @@
         }
 
         function logout() {
+            toastr.error('You have been logged out');
             authFactory.logout();
             $state.go('login');
         }

@@ -15,6 +15,7 @@
         vm.products = [];
         vm.openNav = openNav;
         vm.closeNav = closeNav;
+        vm.search = search;
 
         activate();
 
@@ -25,11 +26,7 @@
             $timeout(function() {
                 productFactory
                     .getAll()
-                    .then(function(response) {
-                        vm.products = response.data;
-                        console.log(vm.products);
-                        vm.loading = false;
-                    })
+                    .then(productsReceived)
                     .catch(function(error) {
                         console.log('you suck');
                     });
@@ -39,8 +36,8 @@
 
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+            var body = document.getElementById("main");
+            body.style.marginLeft = "250px";
         }
 
         /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
@@ -48,6 +45,24 @@
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
             document.body.style.backgroundColor = "white";
+        }
+
+        function search(term) {
+            vm.loading = true;
+            $timeout(function() {
+                productFactory
+                    .getSearchResults(term)
+                    .then(productsReceived)
+                    .catch(function(error) {
+                            console.log('you suck');
+                        });
+                }, 2000);
+        }
+
+        function productsReceived(response) {
+            vm.products = response.data;
+            console.log(vm.products);
+            vm.loading = false;
         }
     }
 })();

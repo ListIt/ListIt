@@ -5,10 +5,10 @@
         .module('app')
         .controller('PostController', PostController);
 
-    PostController.$inject = ['productFactory', 'categoryFactory', '$stateParams', '$state'];
+    PostController.$inject = ['productFactory', 'categoryFactory', '$stateParams', '$state', 'toastr'];
 
     /* @ngInject */
-    function PostController(productFactory, categoryFactory, $stateParams, $state) {
+    function PostController(productFactory, categoryFactory, $stateParams, $state, toastr) {
         var vm = this;
         vm.title = 'PostController';
 
@@ -63,6 +63,7 @@
             productFactory
                 .create(vm.newProduct)
                 .then(function(response) {
+                    toastr.success('You\'ve posted something', 'Success');
                     $state.go('feed');
                 });
         }

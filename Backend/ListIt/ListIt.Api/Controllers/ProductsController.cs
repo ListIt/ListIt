@@ -21,10 +21,7 @@ namespace ListIt.Api.Controllers
         [Authorize]
         public IHttpActionResult GetProducts()
         {
-            var resultSet = new
-            {
-                Count = db.Products.Count(),
-                Products = db.Products.Select(p => new
+            var resultSet = db.Products.Select(p => new
                 {
                     p.ProductId,
                     p.Name,
@@ -50,8 +47,46 @@ namespace ListIt.Api.Controllers
                     {
                         pt.Tag.Name
                     })
-                })
-            };
+                });
+
+            return Ok(resultSet);
+        }
+
+        // GET: api/Products
+        [Authorize, Route("api/products/search")]
+        public IHttpActionResult GetSearchResults(string term)
+        {
+            var resultSet =
+                db.Products.Where(p => p.Name.Contains(term) ||
+                                       p.Category.Name.Contains(term) ||
+                                       p.Description.Contains(term))
+                           .Select(p => new
+                        {
+                            p.ProductId,
+                            p.Name,
+                            p.Description,
+                            p.Posted,
+                            p.Sold,
+                            p.Active,
+                            p.UserId,
+                            p.Amount,
+                            p.Condition,
+                            Category = new
+                            {
+                                p.Category.Name,
+                                p.Category.CategoryId
+                            },
+                            Photos = p.ProductPhotos.Select(pp => new
+                            {
+                                pp.Name,
+                                pp.Url,
+                                pp.Active
+                            }),
+                            ProductTag = p.ProductTags.Select(pt => new
+                            {
+                                pt.Tag.Name
+                            })
+                        });
 
             return Ok(resultSet);
         }
