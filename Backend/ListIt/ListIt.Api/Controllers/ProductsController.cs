@@ -112,7 +112,8 @@ namespace ListIt.Api.Controllers
                 {
                     product.User.UserName,
                     product.User.Id,
-                    product.User.ZipCode
+                    product.User.ZipCode,
+                    product.User.PhoneNumber
                 },
                 Category = new
                 {

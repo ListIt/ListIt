@@ -5,10 +5,10 @@
         .module('app')
         .controller('FeedController', FeedController);
 
-    FeedController.$inject = ['$timeout', 'productFactory', '$stateParams', '$state'];
+    FeedController.$inject = ['$timeout', 'productFactory', '$stateParams', '$state','categoryFactory'];
 
     /* @ngInject */
-    function FeedController($timeout, productFactory, $stateParams, $state) {
+    function FeedController($timeout, productFactory, $stateParams, $state, categoryFactory) {
         var vm = this;
         vm.title = 'FeedController';
 
@@ -16,6 +16,9 @@
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.search = search;
+        // vm.categories = [];
+        // vm.currentFilter = '';
+        // vm.filterClick = false;
 
         activate();
 
@@ -28,10 +31,18 @@
                     .getAll()
                     .then(productsReceived)
                     .catch(function(error) {
-                        console.log('you suck');
+                        console.log('failed to load products');
                     });
             }, 2000);
-
+            categoryFactory
+                .getAll()
+                .then(function(response) {
+                    vm.categories = response.data;
+                    console.log(vm.categories);
+                })
+                .catch(function(error) {
+                    console.log('failed to load categories');
+                })
         }
 
         function openNav() {

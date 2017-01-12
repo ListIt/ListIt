@@ -1,6 +1,5 @@
 <div class="container">
     <h1>{{productDetailCtrl.product.name}}</h1>
-    <br>
     <div class="gallery-container">
         <p class="lead text-center" ng-hide="productDetailCtrl.product.photos.length">Images will show here when uploaded</p>
         <img ng-repeat="photo in productDetailCtrl.product.photos" ng-src="{{photo.url}}">
@@ -12,8 +11,8 @@
         <div><b>Condition:</b> {{productDetailCtrl.getCondition(productDetailCtrl.product)}}</div>
         <div><b>Category:</b> {{productDetailCtrl.product.category.name}}</div>
         <div><b>Email:</b> {{productDetailCtrl.product.seller.userName}}</div>
-        <div><b>Phone:</b> {{productDetailCtrl.product.seller.phone}}</div>
+        <div><b>Phone:</b> {{productDetailCtrl.product.seller.phoneNumber}}</div>
         <br>
-        <button ui-sref="feed" type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100">BACK TO FEED</button>
+        <button ui-sref="feed" type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100">Back to feed</button>
     </div>
 </div>

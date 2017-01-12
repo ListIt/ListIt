@@ -43,13 +43,17 @@
             userFactory
                 .update(vm.user.id, vm.user)
                 .then(function(response) {
+                    toastr.success('Profile updated successfully.')
                     console.log(vm.user);
                 })
+                .catch(function(error) {
+                    toastr.error('Please review your updates.','There was an error saving your changes.');
+                });
 
         }
 
         function logout() {
-            toastr.error('You have been logged out');
+            toastr.info('You have been logged out.');
             authFactory.logout();
             $state.go('login');
         }

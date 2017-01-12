@@ -1,5 +1,6 @@
 <div id="mySidenav" class="sidenav" style="background-color: #1AC7AF" ">
-    <a class="closebtn" ng-click="feedCtrl.closeNav(); filterClick=!filterClick;" style="cursor: pointer;">&times;</a>
+    <a class="closebtn hvr-grow" ng-click="feedCtrl.closeNav(); filterClick=!filterClick;" style="color: lightgrey; cursor: pointer;">&times;</a>
+<!--     <a class="hvr-grow" ng-click="currentFilter=category.name; feedCtrl.closeNav(); filterClick=!filterClick;" ng-repeat="category in feedCtrl.categories" style="color: white; cursor: pointer;">{{category.name}}</a> -->
     <a class="hvr-grow" ng-click="currentFilter='Antique' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer; ">Antiques</a>
     <a class="hvr-grow" ng-click="currentFilter='Appliances' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Appliances</a>
     <a class="hvr-grow" ng-click="currentFilter='Bikes' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Bikes</a>

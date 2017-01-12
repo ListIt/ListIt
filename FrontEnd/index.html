@@ -12,36 +12,41 @@
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="bower_components/hover/css/hover.css" />
     <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Merriweather+Sans:300|Open+Sans|Josefin+Slab" rel="stylesheet">
     <!-- endbower -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="app/feed/feed.css">
-    <link rel="stylesheet" href="app/post/post.css">
+    <!--     <link rel="stylesheet" href="app/feed/feed.css">
+    <link rel="stylesheet" href="app/post/post.css"> -->
     <link rel="stylesheet" href="css/main.css">
     <!-- endinject -->
 </head>
 
-<body ng-controller="MainController as turtle" >
+<body ng-controller="MainController as turtle">
     <div class="navbar" style="margin-bottom: -3px; padding: 0px; background-color: #00937F !important">
         <div class="container-fluid">
-            <a class="navbar-brand hvr-grow" ui-sref="feed" style="color: white !important; width: 225px !important; margin-right: -125px"><span><img alt="" src="img/logo.png.png" style="height: 200%; margin-top: -9px"> ListIt</span></a>
-            <ul class="nav navbar-nav" style="margin-top: 4px; margin-left: 20px">
+            <a id="logoText" class="navbar-brand hvr-grow" ui-sref="feed" style="color: white !important; width: 225px !important; margin-right: -125px;"><span><img alt="" src="img/logo.png.png" style="height: 200%; margin-top: -9px"> ListIt</span></a>
+            <ul class="nav navbar-nav" style="margin-top: 4px; margin-left: 40px">
                 <li class="active">
-                    <a class="hvr-grow" ui-sref="feed" style="color: white !important">Feed</a>
+                    <a id="feed" class="hvr-grow" ui-sref="feed" style="color: white !important"><b>Feed</b></a>
                 </li>
                 <li>
-                    <a class="hvr-grow" ui-sref="about" style="color: white !important">About</a>
+                    <a id="about" class="hvr-grow" ui-sref="about" style="color: white !important"><b>About</b></a>
                 </li>
-
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 1em">
-               <li>
-                    <button class="btn hvr-grow" " style="margin-top: 10px; background-color: #EA6100; color: white" ui-sref="post"><i class="fa fa-dollar"></i>lang <i class="fa fa-dollar"></i>um <i class="fa fa-dollar"></i>wag</i></button>
+                <li>
+                    <button class="btn hvr-grow" style="margin-top: 14px; background-color: #EA6100; color: white; font-family: 'Josefin Slab', serif; font-size: 17px; padding-bottom: 0px; " ui-sref="post"><i class="fa fa-thumbs-o-up"></i><b> Sell</b></button>
+                </li>
+                <li class="dropdown" ng-show="turtle.loggedIn" style="background-color: transparent;">
+                    <a href="#" class="dropdown-toggle" style="background-color: transparent; color: white; font-family: 'Josefin Slab', serif; font-size: 17px; margin-top: 5px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Welcome {{turtle.username}} </b><span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="background-color: #00937F;">
+                        <li><a ui-sref="profile.user" style="color: white; font-family: 'Josefin Slab', serif; font-size: 17px;"><i class="fa fa-user-circle-o"></i><b> Profile</b></a></li>
+                        <li role="separator" class="divider" style="color: white;"></li>
+                        <li><a ng-click="turtle.logout()" style="color:white; cursor: pointer; font-family: 'Josefin Slab', serif; font-size: 17px;"><i class="fa fa-hand-o-left"></i><b> Logout</b></a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a class="hvr-grow" ui-sref="profile.user" ng-show="turtle.loggedIn" style="color:white">Welcome {{turtle.username}}</a>
-                </li>
-                <li>
-                    <a class="hvr-grow" ui-sref="login" ng-hide="turtle.loggedIn" style="color:white">Log In</a>
+                    <a class="hvr-grow" ui-sref="login" ng-hide="turtle.loggedIn" style="color:white; font-family: 'Josefin Slab', serif; font-size: 17px;">Log In</a>
                 </li>
             </ul>
         </div>
