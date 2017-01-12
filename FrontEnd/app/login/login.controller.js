@@ -5,10 +5,10 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['userFactory', 'authFactory', '$state'];
+    LoginController.$inject = ['userFactory', 'authFactory', '$state', 'toastr'];
 
     /* @ngInject */
-    function LoginController(userFactory, authFactory, $state) {
+    function LoginController(userFactory, authFactory, $state, toastr) {
         var vm = this;
         vm.title = 'LoginController';
         vm.register = register;
@@ -20,10 +20,12 @@
             authFactory
                 .login(vm.username, vm.password)
                 .then(function(response) {
-                    $state.go('feed');
+                    toastr.success('You are now logged in.', 'Success!');
+                    $state.go('feed')
                 })
                 .catch(function(error) {
-                    alert('you suck at entering passwords. you should get lastpass. :)');
+                    console.log(error);
+                    toastr.error('Please try again', 'Incorrect Password');
                 })
         }
 
@@ -34,8 +36,12 @@
                     authFactory
                         .login(vm.registration.emailAddress, vm.registration.password)
                         .then(function() {
+                            toastr.success('You are now registered', 'Yay!');
                             $state.go('feed');
-                        });
+                        })
+                })
+                .catch(function(error) {
+                    toastr.error('Make sure your password is at least 8 characters', 'Invalid registration');
                 });
         }
     }

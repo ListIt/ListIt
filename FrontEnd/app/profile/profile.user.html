@@ -1,38 +1,53 @@
-<div class="container">
-    <h1 class="text-center">User Profile</h1>
+<div ng-show="profileUserCtrl.loading">
+<br><br><br><br><br>
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+<div ng-hide="profileUserCtrl.loading" class="container animated fadeIn">
+    <div class="text-center">
+        <h1 ng-hide="nameEditing">{{profileUserCtrl.user.firstName}} {{profileUserCtrl.user.lastName}} <i ng-hide="nameEditing" ng-click="nameEditing=!nameEditing" class="fa fa-edit hvr-grow"></i></h1>
+        <h1>
+            <input ng-show="nameEditing" type="text" ng-model="profileUserCtrl.user.firstName"></input>
+            <input ng-show="nameEditing" type="text" ng-model="profileUserCtrl.user.lastName"></input>
+            <i ng-show="nameEditing" ng-click="profileUserCtrl.updateUser(); nameEditing=!nameEditing" class="fa fa-check hvr-grow"></i>
+        </h1>
+    </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
             <div class="well well-sm">
                 <div class="row">
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-6 col-md-6 col-md-offset-1">
                         <img style="height: 200px" ng-src="{{profileUserCtrl.user.profilePhotoUrl || 'img/userdefaultphoto.jpg'}}" alt="" class="img-rounded img-responsive" />
                         <br>
                         <div class="text-center">
                             <input filepicker data-fp-services="computer,facebook,webcam,box" on-success="profileUserCtrl.updateUser()" ng-model="profileUserCtrl.user.profilePhotoUrl" type="filepicker"></input>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-8">
-                        <h2>
-                            <span ng-hide="editing">{{profileUserCtrl.user.firstName}} {{profileUserCtrl.user.lastName}}</h2></span>
-                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.zipCode"></input>
-                            <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
-                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i> </cite>
+                    <div class="col-sm-6 col-md-5">
+                    <br><br>
                         <cite><i class="glyphicon glyphicon-map-marker">
-                        </i> <span ng-hide="editing">{{profileUserCtrl.user.zipCode}}</span>
-                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.zipCode"></input>
-                            <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
-                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i> </cite>
-                        <p>
-                            <i class="fa fa-envelope"></i> <span ng-hide="editing">{{profileUserCtrl.user.email}}</span>
-                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.email"></input>
-                            <i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
-                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i>
-                            <br/>
-                            <i class="glyphicon glyphicon-gift"></i> <span ng-hide="editing" ng-click="editing=!editing">{{profileUserCtrl.user.birthDate | date}}</span>
-                            <input ng-show="editing" type="text" ng-model="profileUserCtrl.user.birthDate"></input><i ng-hide="editing" ng-click="editing=!editing" class="fa fa-edit"></i>
-                            <i ng-show="editing" ng-click="profileUserCtrl.updateUser(); editing=!editing" class="fa fa-check"></i>
-                            <br/>
-                        </p>
+                        </i> <span ng-hide="zipEditing">{{profileUserCtrl.user.zipCode}}</span>
+                            <input ng-show="zipEditing" type="text" ng-model="profileUserCtrl.user.zipCode"></input>
+                            <i ng-hide="zipEditing" ng-click="zipEditing=!zipEditing" class="fa fa-edit hvr-grow"></i>
+                            <i ng-show="zipEditing" ng-click="profileUserCtrl.updateUser(); zipEditing=!zipEditing" class="fa fa-check hvr-grow"></i> </cite>
+                            <br><br>
+                            <i class="fa fa-envelope"></i> <span ng-hide="emailEditing">{{profileUserCtrl.user.email}}</span>
+                            <input ng-show="emailEditing" type="text" ng-model="profileUserCtrl.user.email"></input>
+                            <i ng-hide="emailEditing" ng-click="emailEditing=!emailEditing" class="fa fa-edit hvr-grow"></i>
+                            <i ng-show="emailEditing" ng-click="profileUserCtrl.updateUser(); emailEditing=!emailEditing" class="fa fa-check hvr-grow"></i>
+                            <br/><br>
+                            <i class="glyphicon glyphicon-gift"></i> <span ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing">{{profileUserCtrl.user.birthDate | date}}</span>
+                            <input ng-show="bdayEditing" type="date" placeholder="Enter Birth Date" ng-model="profileUserCtrl.user.birthDate"></input><i ng-hide="bdayEditing" ng-click="bdayEditing=!bdayEditing" class="fa fa-edit hvr-grow"></i>
+                            <i ng-show="bdayEditing" ng-click="profileUserCtrl.updateUser(); bdayEditing=!bdayEditing" class="fa fa-check hvr-grow"></i>
+                            <br/><br>
+                             <i class="glyphicon glyphicon-phone"></i> <span ng-hide="phoneEditing" ng-click="phoneEditing=!phoneEditing">{{profileUserCtrl.user.phoneNumber}}</span>
+                            <input ng-show="phoneEditing" type="text" ng-model="profileUserCtrl.user.phoneNumber"></input><i ng-hide="phoneEditing" ng-click="phoneEditing=!phoneEditing" class="fa fa-edit hvr-grow"></i>
+                            <i ng-show="phoneEditing" ng-click="profileUserCtrl.updateUser(); phoneEditing=!phoneEditing" class="fa fa-check hvr-grow"></i>
+                            <br/><br>
                         <button ng-click="profileUserCtrl.logout()" class="btn" style="background-color: #EA6100; color: white"><i class="fa fa-logout"></i> Logout</button>
                     </div>
                 </div>
@@ -41,15 +56,29 @@
     </div>
     <h1>My Products</h1>
     <div class="row">
-        <div ui-sref="profile.myProduct({id:{{product.productId}}})" style="cursor: pointer; height: 350px" ng-repeat="product in profileUserCtrl.user.products" class="col-md-4 hvr-float">
+        <div ui-sref="profile.myProduct({id:{{product.productId}}})" style="cursor: pointer; height: 350px" ng-repeat="product in profileUserCtrl.user.products" class="col-sm-6 col-xs-12 col-md-4 hvr-float row-fluid">
             <div class="panel panel" style="border-color: #00937F">
-                <div class="panel-heading" style="background-color: #00937F; color: white">{{product.name}}</div>
+                <div class="panel-heading clearfix" style="background-color: #00937F; color: white">
+                    <div>
+                        <a class="inline" style="font-size: 18px;color:white;text-decoration: none">{{product.name}}</a>
+                        <button class="btn inline pull-right" style="background-color: #EA6100; padding: 2px 10px; ">Edit</button>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="gallery-container" style="text-align: center">
                         <img ng-src="{{product.photos[0].url || 'app/profile/img/noPicture.jpg'}}" alt="" style="height: 100px">
                     </div>
                 </div>
-                <div class="panel-footer">{{product.amount | currency}}</div>
+            </div>
+        </div>
+        <div ui-sref="post" style="cursor: pointer; height: 350px" class="col-sm-6 col-xs-12 col-md-4 hvr-float">
+            <div class="panel panel" style="border-color: #00937F">
+                <div class="panel-heading" style="background-color: #00937F; color: white"><i class="fa fa-plus"></i></div>
+                <div class="panel-body">
+                    <div class="gallery-container" style="text-align: center">
+                        <span><h1>Post New Product</h1></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

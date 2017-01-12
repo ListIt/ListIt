@@ -5,10 +5,10 @@
         .module('app')
         .controller('PostController', PostController);
 
-    PostController.$inject = ['productFactory', 'categoryFactory', '$stateParams', '$state'];
+    PostController.$inject = ['productFactory', 'categoryFactory', '$stateParams', '$state', 'toastr'];
 
     /* @ngInject */
-    function PostController(productFactory, categoryFactory, $stateParams, $state) {
+    function PostController(productFactory, categoryFactory, $stateParams, $state, toastr) {
         var vm = this;
         vm.title = 'PostController';
 
@@ -16,6 +16,16 @@
         vm.newProduct.productPhotos = [];
         vm.photoAdded = photoAdded;
         vm.createPost = createPost;
+
+        vm.conditionArray = [
+            {name: 'New'       , value: 1},
+            {name: 'Like New'  , value: 2},
+            {name: 'Excellent' , value: 3},
+            {name: 'Good'      , value: 4},
+            {name: 'Fair'      , value: 5},
+            {name: 'Salvage'   , value: 6},
+        ]
+        
         activate();
 
         ////////////////
@@ -53,6 +63,7 @@
             productFactory
                 .create(vm.newProduct)
                 .then(function(response) {
+                    toastr.success('You\'ve posted something', 'Success');
                     $state.go('feed');
                 });
         }

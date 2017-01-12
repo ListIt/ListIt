@@ -21,10 +21,7 @@ namespace ListIt.Api.Controllers
         [Authorize]
         public IHttpActionResult GetProducts()
         {
-            var resultSet = new
-            {
-                Count = db.Products.Count(),
-                Products = db.Products.Select(p => new
+            var resultSet = db.Products.Select(p => new
                 {
                     p.ProductId,
                     p.Name,
@@ -37,7 +34,8 @@ namespace ListIt.Api.Controllers
                     p.Condition,
                     Category = new
                     {
-                        p.Category.Name
+                        p.Category.Name,
+                        p.Category.CategoryId
                     },
                     Photos = p.ProductPhotos.Select(pp => new
                     {
@@ -49,8 +47,46 @@ namespace ListIt.Api.Controllers
                     {
                         pt.Tag.Name
                     })
-                })
-            };
+                });
+
+            return Ok(resultSet);
+        }
+
+        // GET: api/Products
+        [Authorize, Route("api/products/search")]
+        public IHttpActionResult GetSearchResults(string term)
+        {
+            var resultSet =
+                db.Products.Where(p => p.Name.Contains(term) ||
+                                       p.Category.Name.Contains(term) ||
+                                       p.Description.Contains(term))
+                           .Select(p => new
+                        {
+                            p.ProductId,
+                            p.Name,
+                            p.Description,
+                            p.Posted,
+                            p.Sold,
+                            p.Active,
+                            p.UserId,
+                            p.Amount,
+                            p.Condition,
+                            Category = new
+                            {
+                                p.Category.Name,
+                                p.Category.CategoryId
+                            },
+                            Photos = p.ProductPhotos.Select(pp => new
+                            {
+                                pp.Name,
+                                pp.Url,
+                                pp.Active
+                            }),
+                            ProductTag = p.ProductTags.Select(pt => new
+                            {
+                                pt.Tag.Name
+                            })
+                        });
 
             return Ok(resultSet);
         }
@@ -76,11 +112,13 @@ namespace ListIt.Api.Controllers
                 {
                     product.User.UserName,
                     product.User.Id,
-                    product.User.ZipCode
+                    product.User.ZipCode,
+                    product.User.PhoneNumber
                 },
                 Category = new
                 {
-                    product.Category.Name
+                    product.Category.Name,
+                    product.Category.CategoryId
                 },
                 Photos = product.ProductPhotos.Select(pp => new
                     {
@@ -113,6 +151,9 @@ namespace ListIt.Api.Controllers
             dbProduct.Name = product.Name;
             dbProduct.Description = product.Description;
             dbProduct.Amount = product.Amount;
+            dbProduct.Condition = product.Condition;
+            dbProduct.CategoryId = product.Category.CategoryId;
+            dbProduct.ProductPhotos = product.ProductPhotos;
 
             db.Entry(dbProduct).State = EntityState.Modified;
 
@@ -175,13 +216,29 @@ namespace ListIt.Api.Controllers
         }
 
         // POST: api/Products/5/photo
-        [Route("api/products/{id}/photo")]
+        [HttpPost, Route("api/products/{id}/photo")]
         public IHttpActionResult PostProductPhoto(int id, ProductPhoto photo)
         {
             photo.ProductId = id;
 
             db.ProductPhotos.Add(photo);
 
+            db.SaveChanges();
+
+            return Ok(photo);
+        }
+
+        // DELETE: api/Products/5/photo
+        [HttpDelete, Route("api/products/{id}/photo/{photoId}")]
+        public IHttpActionResult RemoveProductPhoto(int id, int photoId)
+        {
+            ProductPhoto photo = db.ProductPhotos.Find(photoId);
+            if (photo == null)
+            {
+                return NotFound();
+            }
+
+            db.ProductPhotos.Remove(photo);
             db.SaveChanges();
 
             return Ok();

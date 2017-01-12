@@ -125,7 +125,10 @@ namespace ListIt.Api.Controllers
             dbUsers.Email = user.Email;
             dbUsers.BirthDate = user.BirthDate;
             dbUsers.ZipCode = user.ZipCode;
-            
+            dbUsers.FirstName = user.FirstName;
+            dbUsers.LastName = user.LastName;
+            dbUsers.PhoneNumber = user.PhoneNumber;
+
 
             db.Entry(dbUsers).State = EntityState.Modified;
 

@@ -1,5 +1,10 @@
 To Do
 
--make changes to html
+- add default text for no phone number, etc
+- remove photos from myProduct
 
--add ProfilePhotoUrl column to Users table in SQL Database
+
+Questions:
+-save MyProduct on Checkmark click? or only on Save Changes button?
+-after posting new product, go to feed or user profile?
+

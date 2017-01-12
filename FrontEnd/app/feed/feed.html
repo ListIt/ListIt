@@ -1,56 +1,71 @@
-<div id="mySidenav" class="sidenav" style="background-color: #1AC7AF"">
-    <a href="javascript:void(0)" class="closebtn" ng-click="feedCtrl.closeNav()">&times;</a>
-    <a href="#" style="color: white">Antiques</a>
-    <a href="#" style="color: white">Appliances</a>
-    <a href="#" style="color: white">Bikes</a>
-    <a href="#" style="color: white">Boats</a>
-    <a href="#" style="color: white">Cars</a>
-    <a href="#" style="color: white">Books</a>
-    <a href="#" style="color: white">Phones</a>
-    <a href="#" style="color: white">LightSaber</a>
-    <a href="#" style="color: white">Trailers</a>
-    <a href="#" style="color: white">Video Games</a>
-    <a href="#" style="color: white">Electronics</a>
-    <a href="#" style="color: white">Wanted</a>
-    <a href="#" style="color: white">Other</a>
+<div id="mySidenav" class="sidenav" style="background-color: #1AC7AF" ">
+    <a class="closebtn hvr-grow" ng-click="feedCtrl.closeNav(); filterClick=!filterClick;" style="color: lightgrey; cursor: pointer;">&times;</a>
+<!--     <a class="hvr-grow" ng-click="currentFilter=category.name; feedCtrl.closeNav(); filterClick=!filterClick;" ng-repeat="category in feedCtrl.categories" style="color: white; cursor: pointer;">{{category.name}}</a> -->
+    <a class="hvr-grow" ng-click="currentFilter='Antique' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer; ">Antiques</a>
+    <a class="hvr-grow" ng-click="currentFilter='Appliances' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Appliances</a>
+    <a class="hvr-grow" ng-click="currentFilter='Bikes' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Bikes</a>
+    <a class="hvr-grow" ng-click="currentFilter='Boats' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Boats</a>
+    <a class="hvr-grow" ng-click="currentFilter='Cars' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Cars</a>
+    <a class="hvr-grow" ng-click="currentFilter='Books' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Books</a>
+    <a class="hvr-grow" ng-click="currentFilter='Phones' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Phones</a>
+    
+    <a class="hvr-grow" ng-click="currentFilter='Trailers' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Trailers</a>
+    <a class="hvr-grow" ng-click="currentFilter='Video Games' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Video Games</a>
+    <a class="hvr-grow" ng-click="currentFilter='Electronics' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Electronics</a>
+    <a class="hvr-grow" ng-click="currentFilter='Wanted' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Wanted</a>
+    <a class="hvr-grow" ng-click="currentFilter='Other' ; feedCtrl.closeNav(); filterClick=!filterClick; " style="color: white; cursor: pointer;">Other</a>
 </div>
 <!-- Use any element to open the sidenav -->
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-<div style="position: relative; top: 0; right: 0; bottom: 0; left: 0; z-index: -101; top: 0px; width: 100%; overflow: hidden; height: 400px">
-        <h1 style="margin-left: 27em; margin-top: 8em; position: absolute; z-index: 1; color: white" class="lead">Buy. Sell. Win. </h1>
+<div style="position: relative; top: 0; right: 0; bottom: 0; left: 0; z-index: -101; top: 0px; width: 100%; overflow: hidden; height: 400px" class="animated fadeIn">
+        <h1 style="margin-left: 27em; margin-top: 8em; position: absolute; z-index: 1; color: white " class="lead animated fadeIn">Buy. Sell. Win. </h1>
         <div style="background-color: rgba(0,0,0,.5); position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 1000px "></div>
         <video style="position: relative; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; width: 100%; min-width: 1245px; z-index: -100; object-fit: contain " preload muted autoplay loop>
         <source src="https://d2fa3j67sd1nwo.cloudfront.net/video/homepage.020d4af35dca.mp4 " type="video/mp4 ">
         </video>
 </div>
+<div id="opaque" ng-show="filterClick"></div>
 <div id="main">
     <div class="container">
-        <button class="btn" ng-click="feedCtrl.openNav()" style="background-color: #EA6100; color: white"><i class="fa fa-filter"></i>  Filter</button>
+        <button class="btn" ng-click="feedCtrl.openNav(); filterClick=!filterClick" style="background-color: #EA6100; color: white "><i class="fa fa-filter"></i>  Filter
+        </button>
+        <button class="btn" ng-click="currentFilter=''" style="background-color: #EA6100; color: white ">Reset
+        </button>
         <br>
         <br>
-        <div>
+        <div class="col-md-4" style="z-index: 0; margin-left: -15px">
             <div class="input-group">
                 <span class="input-group-addon">
-                <i class="fa fa-search"></i>
-            </span>
-                <input type="text" class="form-control" placeholder="Search for any item...">
+                    <i class="fa fa-search "></i>
+                </span>
+                <input type="text" class="form-control" placeholder="Search for any item..." ng-model="term">
                 <span class="input-group-btn">
-                <button class="btn" type="button" style="background-color: #EA6100; color: white; cursor: pointer">Go!</button>
-            </span>
+                    <button class="btn " type="button" style="background-color: #EA6100; color: white; cursor: pointer;" ng-click="feedCtrl.search(term)"> Go!</button>
+                </span>
             </div>
         </div>
         <br>
-        <p>Displaying {{feedCtrl.products.count}} products</p>
-        <div class="row">
-            <div ui-sref="productdetail({id:{{product.productId}}})" style="cursor: pointer; height: 350px" ng-repeat="product in feedCtrl.products.products" class="col-md-4 hvr-float">
-                <div class="panel panel" style="border-color: #00937F">
-                    <div class="panel-heading" style="background-color: #00937F; color: white">{{product.name}}</div>
-                    <div class="panel-body">
-                        <div class="gallery-container" style="text-align: center">
-                            <img ng-src="{{product.photos[0].url || 'img/defaultproductphoto.jpg'}}" alt="" style="height: 100px">
+        <div ng-show="feedCtrl.loading">
+            <div class="sk-folding-cube">
+              <div class="sk-cube1 sk-cube"></div>
+              <div class="sk-cube2 sk-cube"></div>
+              <div class="sk-cube4 sk-cube"></div>
+              <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+        <div ng-hide="feedCtrl.loading">
+            <br><p>Displaying <b>{{filtered.length}}</b> products</p>
+            <div class="row ">
+                <div ui-sref="productdetail({id:{{product.productId}}})" style="cursor: pointer; height: 350px " ng-repeat="product in feedCtrl.products | filter:product.category.name=currentFilter as filtered" class="col-md-4 hvr-float">
+                    <div class="panel panel animated fadeIn" style="border-color: #00937F">
+                        <div class="panel-heading " style="background-color: #00937F; color: white; font-size: 22px;">{{product.name}}</div>
+                        <div class="panel-body ">
+                            <div class="gallery-container" style="text-align: center">
+                                <img ng-src="{{product.photos[0].url || 'img/defaultproductphoto.jpg'}}" style="height: 100px">
+                            </div>
                         </div>
+                        <div class="panel-footer">{{product.amount | currency}}</div>
                     </div>
-                    <div class="panel-footer">{{product.amount | currency}}</div>
                 </div>
             </div>
         </div>

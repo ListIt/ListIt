@@ -1,18 +1,18 @@
 <div class="container">
-<h1>{{productDetailCtrl.product.name}}</h1>
-<br>
-<div class="gallery-container">
+    <h1>{{productDetailCtrl.product.name}}</h1>
+    <div class="gallery-container">
         <p class="lead text-center" ng-hide="productDetailCtrl.product.photos.length">Images will show here when uploaded</p>
         <img ng-repeat="photo in productDetailCtrl.product.photos" ng-src="{{photo.url}}">
     </div>
-<div class="container">
-	<div>{{productDetailCtrl.product.amount | currency}}</div>
-	<div>{{productDetailCtrl.product.seller.zipcode}}</div>
-	<div>{{productDetailCtrl.product.description}}</div>
-	<div>{{productDetailCtrl.getCondition(productDetailCtrl.product)}}</div>
-	<div>{{productDetailCtrl.product.seller.userName}}</div>
-	<div>{{productDetailCtrl.product.category.name}}</div>
+    <div class="container">
+        <div><b>Price:</b> {{productDetailCtrl.product.amount | currency}}</div>
+        <div><b>Seller Zip Code:</b> {{productDetailCtrl.product.seller.zipcode}}</div>
+        <div><b>Description:</b> {{productDetailCtrl.product.description}}</div>
+        <div><b>Condition:</b> {{productDetailCtrl.getCondition(productDetailCtrl.product)}}</div>
+        <div><b>Category:</b> {{productDetailCtrl.product.category.name}}</div>
+        <div><b>Email:</b> {{productDetailCtrl.product.seller.userName}}</div>
+        <div><b>Phone:</b> {{productDetailCtrl.product.seller.phoneNumber}}</div>
+        <br>
+        <button ui-sref="feed" type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100">Back to feed</button>
+    </div>
 </div>
-</div>
-<br>
-<button ui-sref="feed" type="button" class="btn btn-primary" style="background-color: #EA6100">BACK TO FEED</button>
