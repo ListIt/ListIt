@@ -1,0 +1,10 @@
+To Do
+
+- add default text for no phone number, etc
+- remove photos from myProduct
+
+
+Questions:
+-save MyProduct on Checkmark click? or only on Save Changes button?
+-after posting new product, go to feed or user profile?
+

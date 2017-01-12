@@ -1,0 +1,69 @@
+<div ng-show="profileMyProductCtrl.loading">
+<br><br><br><br><br>
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+<div ng-hide="profileMyProductCtrl.loading" class="animated fadeIn">
+<div class="container">
+<h1>
+    <span ng-hide="nameEditing" ng-click="nameEditing=!nameEditing" ng-model="profileMyProductCtrl.product.name">{{profileMyProductCtrl.product.name}}</span>
+    <i ng-click="nameEditing=!nameEditing" ng-hide="nameEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="nameEditing" ng-model="profileMyProductCtrl.product.name"></input>
+    <i ng-show="nameEditing" ng-click="nameEditing=!nameEditing" class="fa fa-check"></i>
+</h1>
+<br>
+<div class="gallery-container">
+    <p class="lead text-center" ng-hide="profileMyProductCtrl.product.photos.length">Images will show here when uploaded</p>
+    <div class="row">
+            <div style="cursor: pointer; height: 200px" ng-repeat="photo in profileMyProductCtrl.product.photos" class="col-md-3 hvr-float">
+                <div class="panel panel">
+                            <img ng-src="{{photo.url}}" || 'img/defaultproductphoto.jpg'}}" alt="" style="height: 150px; max-width: 165px;">
+                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a filepicker ng-click="profileMyProductCtrl.photoRemoved(photo)"><h4>X&nbsp;</h4></a></div>
+                </div>
+            </div>
+    <div class="form-group">
+        <label for="exampleInputFile">Add Photo:</label>
+        <input filepicker type="filepicker" data-fp-services="computer,facebook,webcam,box" on-success="profileMyProductCtrl.photoAdded()" ng-model="profileMyProductCtrl.newPhotoUrl" />
+    </div>
+</div>
+    <span><b>Price: </b></span>
+    <span ng-hide="amountEditing" ng-click="amountEditing=!amountEditing" ng-model="profileMyProductCtrl.product.amount">{{profileMyProductCtrl.product.amount | currency}}</span>
+    <i ng-click="amountEditing=!amountEditing" ng-hide="amountEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="amountEditing" ng-model="profileMyProductCtrl.product.amount"></input>
+    <i ng-show="amountEditing" ng-click="amountEditing=!amountEditing" class="fa fa-check"></i>
+    <br>
+    <span><b>Zip Code: </b></span>
+    <span ng-hide="zipEditing" ng-click="zipEditing=!zipEditing" ng-model="profileMyProductCtrl.product.seller.zipCode">{{profileMyProductCtrl.product.seller.zipCode}}</span>
+    <i ng-click="zipEditing=!zipEditing" ng-hide="zipEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="zipEditing" ng-model="profileMyProductCtrl.product.seller.zipCode"></input>
+    <i ng-show="zipEditing" ng-click="zipEditing=!zipEditing" class="fa fa-check"></i>
+    <br>
+    <span><b>Description: </b></span>
+    <span ng-hide="descEditing" ng-click="descEditing=!descEditing" ng-model="profileMyProductCtrl.product.description">{{profileMyProductCtrl.product.description}}</span>
+    <i ng-click="descEditing=!descEditing" ng-hide="descEditing" class="fa fa-edit"></i>
+    <input type="text" ng-show="descEditing" ng-model="profileMyProductCtrl.product.description"></input>
+    <i ng-show="descEditing" ng-click="descEditing=!descEditing" class="fa fa-check"></i>
+    <br>
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+            <span><b>Condition: </b></span>
+            <select class="form-control" ng-options="condition.value as condition.name for condition in profileMyProductCtrl.conditionArray" ng-model="profileMyProductCtrl.product.condition">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+            <span><b>Category: </b></span>
+            <select class="form-control" ng-options="category.categoryId as category.name for category in profileMyProductCtrl.categories" ng-model="profileMyProductCtrl.product.category.categoryId">
+            </select>
+        </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100;" ng-click="profileMyProductCtrl.updateProduct()">Save Changes</button>
+    <button ui-sref="profile.user" type="button" class="btn btn-primary" style="background-color: #EA6100; border-color: #EA6100;">Back to profile</button>
+    <button class="btn btn-danger pull-right" ng-click="profileMyProductCtrl.deleteProduct()">Delete Product</button>
+</div>

@@ -1,0 +1,40 @@
+{
+  "name": "frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Diego Corrales <diegoamcorrales@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ListIt/ListIt",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "overrides": {
+    "font-awesome": {
+      "main": "css/font-awesome.css"
+    },
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular-chart.js": "^1.1.1",
+    "angular-toastr": "^2.1.1",
+    "angular-ui-router": "^0.3.2",
+    "angular-filepicker": "^1.1.4",
+    "angular-img-fallback": "^0.2.0",
+    "angular-local-storage": "^0.5.2",
+    "hover": "^2.1.0",
+    "animate.css": "^3.5.2"
+  }
+}
